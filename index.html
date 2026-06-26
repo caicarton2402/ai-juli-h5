@@ -333,7 +333,7 @@
         <!-- 核心团队实力 -->
         <div class="about-box">
             <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)">核心团队实力</h3>
-            <p>羽宇科技核心团队由人工智能算法、云计算架构、软硬件工程、产品设计等领域的资深从业者组成，兼具前沿技术研发能力 with 商业化落地经验。团队深耕AI行业多年，持续跟进全球人工智能前沿技术迭代，专注于技术优化 with 体验升级，坚持以用户真实需求为核心，打磨每一项产品功能 with 服务细节。</p>
+            <p>羽宇科技核心团队由人工智能算法、云计算架构、软硬件工程、产品设计等领域的资深从业者组成，兼具前沿技术研发能力 with 商业化落地经验. 团队深耕AI行业多年，持续跟进全球人工智能前沿技术迭代，专注于技术优化 with 体验升级，坚持以用户真实需求为核心，打磨每一项产品功能 with 服务细节。</p>
             <p style="margin-top:12px">从底层算力架构优化、算法模型微调，到产品交互设计、场景化功能迭代，团队实现全链路自主研发 with 迭代，具备独立完成AI产品研发、部署、运维、升级的完整能力。</p>
         </div>
 
@@ -386,7 +386,7 @@
     const i18n = {
         zh: {
             "nav.home": "首页", "nav.tokens": "Ai算力引擎", "nav.studio": "Ai Studio", "nav.agents": "Ai智能体", "nav.about": "关于我们",
-            "hero.title": "释放 AI 的无限可能", "hero.desc": "从算力引擎到智能创作，一站式 AI 解决方案，赋能开发者与创作者。", "hero.btnStart": "立即体验", "hero.btnMore": "了解更多",
+            "hero.title": "释放 AI 的无限可能", "hero.desc": "从算力引擎到智能创作，一站式 AI 解决方案，赋能开发者 with 创作者。", "hero.btnStart": "立即体验", "hero.btnMore": "了解更多",
             "stats.projects": "活跃项目", "stats.uptime": "服务可用性", "stats.tokens": "每日 Token 处理", "stats.rating": "用户评分",
             "tokens.title": "Ai 算力引擎", "tokens.starter": "个人开发者 & 小规模测试", "tokens.pro": "专业团队 & 生产级应用", "tokens.ent": "企业级大规模部署",
             "tokens.feat1": "标准延迟流式推理", "tokens.feat2": "7B参数量级支持", "tokens.feat4": "低延迟高性能推理", "tokens.feat5": "7B~70B全梯度基座支持", "tokens.feat7": "超低延迟超高速推理", "tokens.feat9": "私有化部署 + 99.99% SLA",
@@ -459,7 +459,7 @@
     });
 
     document.getElementById('subBackBtn').onclick = () => { subContainer.classList.remove('active'); document.querySelector('.nav-links a.active').click(); }
-    document.getElementById('logoHome').onclick = () => document.querySelector('[data-section="home"]').click();
+    document.getElementById('logoHome').onclick = () => document.querySelector('[data-section=\"home\"]').click();
     document.getElementById('langBtn').onclick = (e) => { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('open'); }
     document.querySelectorAll('#langDropdown button').forEach(b => b.onclick = () => setLanguage(b.dataset.lang));
     document.getElementById('closeReg').onclick = () => registerModal.classList.remove('open');
