@@ -177,23 +177,42 @@
         .form-group input:focus { border-color: var(--primary); background: rgba(255,255,255,0.08); }
 
         /* Responsive UI */
+        /* Global Mobile/Safe Area Fixes */
+        .navbar { padding: env(safe-area-inset-top) 5% 0; }
+        .footer { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+
         @media (max-width: 1024px) {
-            .navbar { padding: 0 4%; }
+            .navbar { padding: 0 4%; height: 64px; }
             .nav-links { 
-                display: none; 
-                position: fixed; 
-                top: 0; left: 0; right: 0; bottom: 0;
-                width: 100vw; height: 100vh;
-                background: rgba(10, 10, 26, 0.98);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                z-index: 1050;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 30px;
-                padding: 40px;
+                padding-top: env(safe-area-inset-top);
+                gap: 20px; 
             }
+            .nav-links a { font-size: 28px; }
+            .section { padding-top: 100px; }
+        }
+
+        /* Small Screen (iPhone Mini / SE) Optimization */
+        @media (max-width: 380px) {
+            :root { --radius: 20px; }
+            .section { padding-left: 15px; padding-right: 15px; }
+            .section-title { font-size: 32px; }
+            .hero h1 { font-size: 38px; line-height: 1.1; }
+            .hero p { font-size: 16px; margin-bottom: 30px; }
+            .hero-stats { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .hero-stats h3 { font-size: 28px; }
+            
+            .card { padding: 24px 20px; }
+            .pricing-card .price { font-size: 36px; }
+            .matrix-item { padding: 20px 0; }
+            .matrix-val { font-size: 20px; }
+            .model-info h4 { font-size: 16px; }
+
+            .about-hero-card { padding: 30px 20px; }
+            .value-item { padding: 20px 10px; font-size: 14px; }
+
+            /* Full-screen menu text size for small height */
+            .nav-links a { font-size: 22px; }
+        }
             .nav-links.open {
                 display: flex;
                 animation: menuFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -471,13 +490,13 @@
             if (el.dataset.sub.startsWith('home-')) { registerModal.classList.add('open'); return; }
             subContainer.classList.add('active');
             sections.forEach(s => s.classList.remove('active'));
-            document.getElementById('subContent').innerHTML = `<h2 class='section-title'>${el.innerText}</h2><p class='section-subtitle'>Details coming soon for ${el.dataset.sub}...</p>`;
+            document.getElementById('subContent').innerHTML = \`<h2 class='section-title'>\${el.innerText}</h2><p class='section-subtitle'>Details coming soon for \${el.dataset.sub}...</p>\`;
             window.scrollTo(0, 0);
         }
     });
 
     document.getElementById('subBackBtn').onclick = () => { subContainer.classList.remove('active'); document.querySelector('.nav-links a.active').click(); }
-    document.getElementById('logoHome').onclick = () => document.querySelector('[data-section="home"]').click();
+    document.getElementById('logoHome').onclick = () => document.querySelector('[data-section=\"home\"]').click();
     document.getElementById('langBtn').onclick = () => document.getElementById('langDropdown').classList.toggle('open');
     document.querySelectorAll('#langDropdown button').forEach(b => b.onclick = () => setLanguage(b.dataset.lang));
 
