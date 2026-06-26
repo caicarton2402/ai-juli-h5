@@ -200,7 +200,13 @@
         }
 
         .pricing-card.popular { border-color: var(--primary); background: rgba(108, 99, 255, 0.08); }
+        .pricing-card .badge {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            padding: 4px 18px; border-radius: 40px; background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-size: 12px; font-weight: 600; color: #fff;
+        }
         .pricing-card .price { font-size: 44px; font-weight: 700; margin: 16px 0; }
+        .pricing-card .price span { font-size: 16px; font-weight: 400; color: var(--text-muted); }
         .pricing-card ul { text-align: left; margin: 20px 0; }
         .pricing-card ul li { margin: 8px 0; font-size: 14px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
         .pricing-card ul li i { color: var(--secondary); }
@@ -212,11 +218,34 @@
         .agent-card .avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
         .agent-card .status { display: inline-block; margin-top: 12px; padding: 4px 14px; border-radius: 40px; font-size: 12px; background: rgba(0, 212, 255, 0.12); color: var(--secondary); }
 
-        /* About & Team */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .team-member { text-align: center; padding: 20px; }
-        .team-member .avatar-small { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-light), var(--secondary)); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        /* Price Matrix Styles */
+        .price-matrix-container { margin-top: 60px; padding: 40px; background: rgba(108, 99, 255, 0.04); border: 1px solid var(--border-glow); border-radius: var(--radius); }
+        .matrix-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+        .matrix-header h3 { font-size: 28px; font-weight: 700; color: var(--text-white); }
+        .matrix-header p { color: var(--text-muted); font-size: 14px; }
+        .matrix-list { display: flex; flex-direction: column; gap: 16px; }
+        .matrix-item { display: flex; align-items: center; justify-content: space-between; padding: 24px 32px; background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; transition: var(--transition); }
+        .matrix-item:hover { background: var(--bg-card-hover); border-color: var(--primary-light); transform: scale(1.01); }
+        .model-info h4 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+        .model-info p { font-size: 13px; color: var(--text-muted); }
+        .model-discount { font-size: 24px; font-weight: 700; color: var(--secondary); display: flex; align-items: center; gap: 15px; }
+        .model-discount::before { content: ""; width: 2px; height: 30px; background: rgba(255, 255, 255, 0.1); margin-right: 15px; }
+
+        .unified-key-banner { margin-bottom: 40px; padding: 20px 30px; background: linear-gradient(90deg, rgba(108, 99, 255, 0.2), rgba(0, 212, 255, 0.1)); border-radius: 12px; border-left: 4px solid var(--secondary); display: flex; align-items: center; gap: 20px; }
+        .unified-key-banner i { font-size: 24px; color: var(--secondary); }
+        .unified-key-banner h4 { font-size: 18px; font-weight: 600; }
+
+        /* About Section Enhanced */
+        .about-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
+        .about-card { background: var(--bg-card); border-radius: var(--radius); padding: 32px; border: 1px solid rgba(255, 255, 255, 0.06); transition: var(--transition); }
+        .about-card:hover { border-color: var(--primary-light); background: var(--bg-card-hover); }
+        .about-card h3 { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; color: var(--secondary); }
+        .about-card p { color: var(--text-muted); font-size: 16px; line-height: 1.8; margin-bottom: 12px; }
+        .about-section-title { font-size: 24px; font-weight: 700; margin: 20px 0 10px; border-left: 4px solid var(--primary); padding-left: 15px; }
+        .about-grid-detailed { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+        .value-item { background: rgba(108, 99, 255, 0.1); padding: 16px; border-radius: 12px; text-align: center; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--primary-light); border: 1px solid rgba(108, 99, 255, 0.2); }
 
         /* Subpage System */
         #subpage-container {
@@ -255,7 +284,6 @@
         .modal-box input { width: 100%; padding: 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: #fff; outline: none; }
         .btn-submit { width: 100%; padding: 14px; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; font-weight: 600; border: none; cursor: pointer; margin-top: 10px; }
 
-        /* Responsive */
         @media (max-width: 820px) {
             .navbar { padding: 0 20px; }
             .nav-links {
@@ -265,7 +293,9 @@
             .nav-links.open { transform: translateY(0); opacity: 1; }
             .hamburger { display: flex; }
             .hero h1 { font-size: 40px; }
-            .about-grid, .sub-detail-grid { grid-template-columns: 1fr; }
+            .about-split, .values-grid { grid-template-columns: 1fr; }
+            .about-grid-detailed { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -278,9 +308,9 @@
     </div>
     <div class="nav-links" id="navLinks">
         <a data-section="home" class="active" data-i18n="nav.home">首页</a>
-        <a data-section="tokens" data-i18n="nav.tokens">算力引擎</a>
-        <a data-section="studio" data-i18n="nav.studio">AI 创作</a>
-        <a data-section="agents" data-i18n="nav.agents">智能体</a>
+        <a data-section="tokens" data-i18n="nav.tokens">Ai算力引擎</a>
+        <a data-section="studio" data-i18n="nav.studio">Ai 创作</a>
+        <a data-section="agents" data-i18n="nav.agents">Ai智能体</a>
         <a data-section="about" data-i18n="nav.about">关于我们</a>
     </div>
     <div class="nav-actions">
@@ -325,49 +355,148 @@
     </section>
 
     <section class="section" id="section-tokens">
-        <h2 class="section-title" data-i18n="tokens.title">AI 算力引擎</h2>
+        <h2 class="section-title" data-i18n="tokens.title">Ai 算力引擎</h2>
+        <p class="section-subtitle" data-i18n="tokens.subtitle">高性能 GPU 集群，按需付费，弹性扩展，提供澎湃算力。</p>
         <div class="pricing-grid">
             <div class="pricing-card" data-sub="token-starter">
-                <div class="price">$0.008 <span>/ 1K</span></div>
+                <div class="price">$0.008 <span data-i18n="tokens.perUnit">/ 1K Tokens</span></div>
                 <p data-i18n="tokens.starterDesc">个人开发者 & 小规模测试</p>
+                <ul>
+                    <li data-i18n="tokens.feat1"><i class="fas fa-check"></i>标准推理速度</li>
+                    <li data-i18n="tokens.feat2"><i class="fas fa-check"></i>7B 模型支持</li>
+                    <li data-i18n="tokens.feat3"><i class="fas fa-check"></i>24/7 技术支持</li>
+                </ul>
                 <button class="btn-submit" data-sub="token-starter" data-i18n="tokens.select">选择方案</button>
             </div>
             <div class="pricing-card popular" data-sub="token-pro">
-                <div class="price">$0.024 <span>/ 1K</span></div>
+                <div class="badge" data-i18n="tokens.popular">最受欢迎</div>
+                <div class="price">$0.024 <span data-i18n="tokens.perUnit">/ 1K Tokens</span></div>
                 <p data-i18n="tokens.proDesc">专业团队 & 生产级应用</p>
+                <ul>
+                    <li data-i18n="tokens.feat4"><i class="fas fa-check"></i>高性能推理</li>
+                    <li data-i18n="tokens.feat5"><i class="fas fa-check"></i>70B+ 模型支持</li>
+                    <li data-i18n="tokens.feat6"><i class="fas fa-check"></i>专属优化 & 优先级队列</li>
+                </ul>
                 <button class="btn-submit" data-sub="token-pro" data-i18n="tokens.select">选择方案</button>
+            </div>
+            <div class="pricing-card" data-sub="token-enterprise">
+                <div class="price">$0.056 <span data-i18n="tokens.perUnit">/ 1K Tokens</span></div>
+                <p data-i18n="tokens.entDesc">企业级大规模部署</p>
+                <ul>
+                    <li data-i18n="tokens.feat7"><i class="fas fa-check"></i>超高速推理</li>
+                    <li data-i18n="tokens.feat8"><i class="fas fa-check"></i>多模态模型支持</li>
+                    <li data-i18n="tokens.feat9"><i class="fas fa-check"></i>私有化部署 & SLA 保障</li>
+                </ul>
+                <button class="btn-submit" data-sub="token-enterprise" data-i18n="tokens.select">选择方案</button>
+            </div>
+        </div>
+
+        <!-- 价格矩阵 -->
+        <div class="price-matrix-container">
+            <div class="unified-key-banner">
+                <i class="fas fa-key"></i>
+                <h4 data-i18n="tokens.keyTitle">统一 Key：一个 Key 可用多模型，接入 / 切换更省心</h4>
+            </div>
+            
+            <div class="matrix-header">
+                <h3 data-i18n="tokens.matrixTitle">模型价格矩阵</h3>
+                <p data-i18n="tokens.matrixSub">相对官方价格</p>
+            </div>
+
+            <div class="matrix-list">
+                <div class="matrix-item">
+                    <div class="model-info">
+                        <h4>GPT-5.5 / GPT-5.4</h4>
+                        <p data-i18n="tokens.gptDesc">官方资源接入，重点成本优势</p>
+                    </div>
+                    <div class="model-discount">3<span data-i18n="tokens.off">折起</span></div>
+                </div>
+                <div class="matrix-item">
+                    <div class="model-info">
+                        <h4>seednace 2.0</h4>
+                        <p data-i18n="tokens.seedDesc">最新视觉大模型适配</p>
+                    </div>
+                    <div class="model-discount">8.0<span data-i18n="tokens.off">折起</span></div>
+                </div>
+                <div class="matrix-item">
+                    <div class="model-info">
+                        <h4>GLM5.2</h4>
+                        <p data-i18n="tokens.glmDesc">智谱 AI 核心合作伙伴</p>
+                    </div>
+                    <div class="model-discount">8.0<span data-i18n="tokens.off">折起</span></div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="section" id="section-studio">
-        <h2 class="section-title" data-i18n="studio.title">AI 创作中心</h2>
+        <h2 class="section-title" data-i18n="studio.title">Ai 创作中心</h2>
+        <p class="section-subtitle" data-i18n="studio.subtitle">文本生成、图像创作、音频处理、视频合成，一站式 AI 工具集。</p>
         <div class="showcase-grid">
-            <div class="showcase-item" data-sub="studio-text"><i class="fas fa-file-alt"></i><h4 data-i18n="studio.text">文本生成</h4></div>
-            <div class="showcase-item" data-sub="studio-image"><i class="fas fa-image"></i><h4 data-i18n="studio.image">图像创作</h4></div>
-            <div class="showcase-item" data-sub="studio-audio"><i class="fas fa-volume-up"></i><h4 data-i18n="studio.audio">音频处理</h4></div>
-            <div class="showcase-item" data-sub="studio-video"><i class="fas fa-video"></i><h4 data-i18n="studio.video">视频生成</h4></div>
+            <div class="showcase-item" data-sub="studio-text"><i class="fas fa-file-alt"></i><h4 data-i18n="studio.text">文本生成</h4><p data-i18n="studio.textSub">智能文案、翻译、摘要</p></div>
+            <div class="showcase-item" data-sub="studio-image"><i class="fas fa-image"></i><h4 data-i18n="studio.image">图像创作</h4><p data-i18n="studio.imageSub">文生图、高清修复</p></div>
+            <div class="showcase-item" data-sub="studio-audio"><i class="fas fa-volume-up"></i><h4 data-i18n="studio.audio">音频处理</h4><p data-i18n="studio.audioSub">语音合成、音色转换</p></div>
+            <div class="showcase-item" data-sub="studio-video"><i class="fas fa-video"></i><h4 data-i18n="studio.video">视频生成</h4><p data-i18n="studio.videoSub">数字人、短视频自动剪辑</p></div>
         </div>
     </section>
 
     <section class="section" id="section-agents">
-        <h2 class="section-title" data-i18n="agents.title">智能体集群</h2>
+        <h2 class="section-title" data-i18n="agents.title">Ai 智能体集群</h2>
+        <p class="section-subtitle" data-i18n="agents.subtitle">专属智能助手，自动执行任务，7×24 小时在线工作。</p>
         <div class="agent-grid">
-            <div class="agent-card" data-sub="agent-assistant"><div class="avatar"><i class="fas fa-robot"></i></div><h4 data-i18n="agents.gen">通用助手</h4><div class="status">Online</div></div>
-            <div class="agent-card" data-sub="agent-coder"><div class="avatar"><i class="fas fa-code"></i></div><h4 data-i18n="agents.coder">编程助手</h4><div class="status">Online</div></div>
+            <div class="agent-card" data-sub="agent-assistant"><div class="avatar"><i class="fas fa-robot"></i></div><h4 data-i18n="agents.gen">通用助手</h4><p data-i18n="agents.genDesc">问答、规划、总结</p><div class="status" data-i18n="common.online">在线</div></div>
+            <div class="agent-card" data-sub="agent-coder"><div class="avatar"><i class="fas fa-code"></i></div><h4 data-i18n="agents.coder">编程助手</h4><p data-i18n="agents.coderDesc">代码生成、Debug、优化</p><div class="status" data-i18n="common.online">在线</div></div>
+            <div class="agent-card" data-sub="agent-designer"><div class="avatar"><i class="fas fa-palette"></i></div><h4 data-i18n="agents.designer">设计助手</h4><p data-i18n="agents.designerDesc">创意、构图、风格建议</p><div class="status" data-i18n="common.online">在线</div></div>
+            <div class="agent-card" data-sub="agent-marketing"><div class="avatar"><i class="fas fa-bullhorn"></i></div><h4 data-i18n="agents.market">营销助手</h4><p data-i18n="agents.marketDesc">文案、策略、推广计划</p><div class="status" data-i18n="common.online">在线</div></div>
         </div>
     </section>
 
     <section class="section" id="section-about">
         <h2 class="section-title" data-i18n="about.title">关于我们</h2>
-        <div class="about-grid">
-            <div class="about-text">
-                <p data-i18n="about.p1">我们致力于打造最易用、最强大的 AI 生产力平台。</p>
-                <p data-i18n="about.p2">团队由来自人工智能、云计算领域的资深专家组成。</p>
+        <p class="section-subtitle" data-i18n="about.subtitle">羽宇科技 · 专注于人工智能核心技术研发与产品化落地</p>
+        
+        <div class="about-container">
+            <div class="about-card">
+                <h3 data-i18n="about.introTitle"><i class="fas fa-building"></i> 企业简介</h3>
+                <p data-i18n="about.introContent1">羽宇科技，是一家聚焦人工智能核心技术研发与场景化落地的创新科技企业，深耕AI算力基建、智能创作、AI智能体三大核心赛道，致力于打造轻量化、高效率、全场景的一站式AI生产力平台。</p>
+                <p data-i18n="about.introContent2">依托自主研发的弹性算力调度系统与多模态AI技术体系，我们专注于轻量化部署、高性价比、极简操作体验，兼顾技术专业性与大众易用性。</p>
             </div>
-            <div class="team-grid">
-                <div class="team-member" data-sub="team-lead"><div class="avatar-small"><i class="fas fa-user"></i></div><h5 data-i18n="about.founder">创始人</h5></div>
-                <div class="team-member" data-sub="team-ai"><div class="avatar-small"><i class="fas fa-brain"></i></div><h5 data-i18n="about.aiTeam">AI 团队</h5></div>
+
+            <div class="about-section-title" data-i18n="about.coreTitle">核心业务体系</div>
+            <div class="about-grid-detailed">
+                <div class="card">
+                    <div class="icon"><i class="fas fa-microchip"></i></div>
+                    <h3 data-i18n="nav.tokens">Ai算力引擎</h3>
+                    <p data-i18n="about.core1">搭载高端算力硬件，支持全系列大模型推理与微调，提供按量计费、秒级调度的算力服务。</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-magic"></i></div>
+                    <h3 data-i18n="nav.studio">Ai 创作</h3>
+                    <p data-i18n="about.core2">整合文本、图像、音频、视频四大能力，覆盖文案设计、音视频制作、数字人播报等全场景需求。</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-robot"></i></div>
+                    <h3 data-i18n="nav.agents">Ai智能体</h3>
+                    <p data-i18n="about.core3">打造硬件+Ai智能体矩阵，实现办公提效、代码开发、营销策划等工作的自动化落地。</p>
+                </div>
+            </div>
+
+            <div class="about-split">
+                <div class="about-card">
+                    <h3 data-i18n="about.teamTitle"><i class="fas fa-users-cog"></i> 核心团队实力</h3>
+                    <p data-i18n="about.teamContent">团队由来自算法、云计算及工程领域的资深专家组成。具备全链路自主研发能力，为平台稳定运行与功能创新提供坚实支撑。</p>
+                </div>
+                <div class="about-card">
+                    <h3 data-i18n="about.visionTitle"><i class="fas fa-eye"></i> 企业愿景</h3>
+                    <p data-i18n="about.visionContent">成为轻量化、普惠化的顶尖AI生产力平台，赋能每一位创作者与企业，以科技创新驱动效率升级。</p>
+                </div>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-item"><i class="fas fa-lightbulb"></i> <span data-i18n="about.v1">技术创新</span></div>
+                <div class="value-item"><i class="fas fa-user-heart"></i> <span data-i18n="about.v2">用户至上</span></div>
+                <div class="value-item"><i class="fas fa-seedling"></i> <span data-i18n="about.v3">务实笃行</span></div>
+                <div class="value-item"><i class="fas fa-hand-holding-heart"></i> <span data-i18n="about.v4">开放普惠</span></div>
             </div>
         </div>
     </section>
@@ -383,16 +512,16 @@
     <div class="socials">
         <a href="#"><i class="fab fa-github"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-discord"></i></a>
     </div>
 </div>
 
-<!-- Modals -->
 <div class="modal-overlay" id="loginModal">
     <div class="modal-box">
         <button class="close-btn"><i class="fas fa-xmark"></i></button>
         <h2 data-i18n="auth.login">登录</h2>
-        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
-        <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••"></div>
+        <div class="form-group"><label data-i18n="auth.email">邮箱</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label data-i18n="auth.pass">密码</label><input type="password" placeholder="••••••••"></div>
         <button class="btn-submit" data-i18n="auth.login">登录</button>
     </div>
 </div>
@@ -401,36 +530,69 @@
     <div class="modal-box">
         <button class="close-btn"><i class="fas fa-xmark"></i></button>
         <h2 data-i18n="auth.register">注册</h2>
-        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
-        <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••"></div>
+        <div class="form-group"><label data-i18n="auth.email">邮箱</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label data-i18n="auth.pass">密码</label><input type="password" placeholder="••••••••"></div>
         <button class="btn-submit" data-i18n="auth.register">注册</button>
     </div>
 </div>
 
 <script>
-    // i18n Dictionary
     const i18n = {
         zh: {
-            "nav.home": "首页", "nav.tokens": "算力引擎", "nav.studio": "AI 创作", "nav.agents": "智能体", "nav.about": "关于我们",
+            "nav.home": "首页", "nav.tokens": "Ai算力引擎", "nav.studio": "Ai 创作", "nav.agents": "Ai智能体", "nav.about": "关于我们",
             "hero.badge": "下一代 AI 智能平台", "hero.title": "释放<br><span class='highlight'>AI 的无限可能</span>",
-            "hero.desc": "一站式 AI 解决方案，赋能开发者与创作者。", "hero.btnStart": "立即体验", "hero.btnMore": "了解更多",
+            "hero.desc": "从算力引擎到智能创作，一站式 AI 解决方案，赋能开发者与创作者。", "hero.btnStart": "立即体验", "hero.btnMore": "了解更多",
             "stats.projects": "活跃项目", "stats.uptime": "可用性", "stats.tokens": "每日处理", "stats.rating": "评分",
-            "tokens.title": "AI 算力引擎", "tokens.starterDesc": "个人开发者 & 测试", "tokens.proDesc": "专业团队 & 生产应用", "tokens.select": "选择方案",
-            "studio.title": "AI 创作中心", "studio.text": "文本生成", "studio.image": "图像创作", "studio.audio": "音频处理", "studio.video": "视频生成",
-            "agents.title": "智能体集群", "agents.gen": "通用助手", "agents.coder": "编程助手",
-            "about.title": "关于我们", "about.p1": "致力于打造最强大的 AI 平台。", "about.p2": "由资深 AI 专家团队组成。", "about.founder": "创始人", "about.aiTeam": "AI 团队",
-            "auth.login": "登录", "auth.register": "注册", "common.back": "返回"
+            "tokens.title": "Ai 算力引擎", "tokens.subtitle": "高性能 GPU 集群，按需付费，弹性扩展，提供澎湃算力。", "tokens.perUnit": "/ 1K Tokens", "tokens.select": "选择方案", "tokens.popular": "最受欢迎",
+            "tokens.starterDesc": "个人开发者 & 小规模测试", "tokens.proDesc": "专业团队 & 生产级应用", "tokens.entDesc": "企业级大规模部署",
+            "tokens.feat1": "标准推理速度", "tokens.feat2": "7B 模型支持", "tokens.feat3": "24/7 技术支持",
+            "tokens.feat4": "高性能推理", "tokens.feat5": "70B+ 模型支持", "tokens.feat6": "专属优化 & 优先级队列",
+            "tokens.feat7": "超高速推理", "tokens.feat8": "多模态模型支持", "tokens.feat9": "私有化部署 & SLA 保障",
+            "tokens.keyTitle": "统一 Key：一个 Key 可用多模型，接入 / 切换更省心",
+            "tokens.matrixTitle": "模型价格矩阵", "tokens.matrixSub": "相对官方价格",
+            "tokens.gptDesc": "官方资源接入，重点成本优势", "tokens.seedDesc": "最新视觉大模型适配", "tokens.glmDesc": "智谱 AI 核心合作伙伴", "tokens.off": "折起",
+            "studio.title": "Ai 创作中心", "studio.subtitle": "文本生成、图像创作、音频处理、视频合成，一站式 AI 工具集。",
+            "studio.text": "文本生成", "studio.textSub": "智能文案、翻译、摘要", "studio.image": "图像创作", "studio.imageSub": "文生图、高清修复", "studio.audio": "音频处理", "studio.audioSub": "语音合成、音色转换", "studio.video": "视频生成", "studio.videoSub": "数字人、短视频自动剪辑",
+            "agents.title": "Ai 智能体集群", "agents.subtitle": "专属智能助手，自动执行任务，7×24 小时在线工作。",
+            "agents.gen": "通用助手", "agents.genDesc": "问答、规划、总结", "agents.coder": "编程助手", "agents.coderDesc": "代码生成、Debug、优化", "agents.designer": "设计助手", "agents.designerDesc": "创意、构图、风格建议", "agents.market": "营销助手", "agents.marketDesc": "文案、策略、推广计划",
+            "about.title": "关于我们", "about.subtitle": "羽宇科技 · 专注于人工智能核心技术研发与产品化落地", "about.introTitle": "企业简介",
+            "about.introContent1": "羽宇科技，是一家聚焦人工智能核心技术研发与场景化落地的创新科技企业，深耕AI算力基建、智能创作、AI智能体三大核心赛道。",
+            "about.introContent2": "依托弹性算力调度系统与多模态AI技术体系，我们专注于轻量化部署、高性价比、极简操作体验，兼顾专业性与易用性。",
+            "about.coreTitle": "核心业务体系", "about.core1": "搭载高端算力硬件，支持全模型推理与微调。", "about.core2": "整合文、图、音、视四大能力，覆盖全场景需求。", "about.core3": "Ai智能硬件+智能体矩阵，实现办公自动化。",
+            "about.teamTitle": "核心团队实力", "about.teamContent": "由算法、云计算及工程领域的资深专家组成，具备全链路自主研发能力。",
+            "about.visionTitle": "企业愿景", "about.visionContent": "成为轻量化、普惠化的顶尖AI生产力平台，赋能每一位创作者与企业。",
+            "about.v1": "技术创新", "about.v2": "用户至上", "about.v3": "务实笃行", "about.v4": "开放普惠",
+            "auth.login": "登录", "auth.register": "注册", "auth.email": "邮箱", "auth.pass": "密码", "common.back": "返回", "common.online": "在线",
+            "sub.tourTitle": "平台导览", "sub.tourDesc": "AI·JuLi 一站式人工智能服务平台", "sub.tourStart": "快速开始", "sub.tourSteps": "注册账号 → 选择服务 → 开始使用 → 管理项目", "sub.tourShield": "安全保障", "sub.tourShieldDesc": "数据加密传输、隐私保护、合规认证",
+            "sub.missionTitle": "我们的使命", "sub.missionDesc": "让 AI 技术普惠每一个人、每一家企业", "sub.vision": "愿景", "sub.visionDesc": "成为全球领先的 AI 生产力平台，推动科技创新与产业升级。", "sub.values": "价值观", "sub.valuesList": "<li>用户至上</li><li>技术创新</li><li>开放协作</li><li>持续成长</li>"
         },
         en: {
-            "nav.home": "Home", "nav.tokens": "Compute", "nav.studio": "Studio", "nav.agents": "Agents", "nav.about": "About",
+            "nav.home": "Home", "nav.tokens": "Tokens", "nav.studio": "Ai Studio", "nav.agents": "Ai Agents", "nav.about": "About Us",
             "hero.badge": "Next-Gen AI Platform", "hero.title": "Unlock<br><span class='highlight'>Infinite AI Power</span>",
-            "hero.desc": "One-stop AI solutions empowering developers and creators.", "hero.btnStart": "Get Started", "hero.btnMore": "Learn More",
-            "stats.projects": "Active Projects", "stats.uptime": "Uptime", "stats.tokens": "Daily Tokens", "stats.rating": "Rating",
-            "tokens.title": "AI Compute Engine", "tokens.starterDesc": "Individual & Testing", "tokens.proDesc": "Team & Production", "tokens.select": "Select Plan",
-            "studio.title": "AI Studio", "studio.text": "Text Gen", "studio.image": "Image Gen", "studio.audio": "Audio Gen", "studio.video": "Video Gen",
-            "agents.title": "AI Agents", "agents.gen": "General Agent", "agents.coder": "Coding Agent",
-            "about.title": "About Us", "about.p1": "Crafting the most powerful AI platform.", "about.p2": "Led by veteran AI experts.", "about.founder": "Founder", "about.aiTeam": "AI Team",
-            "auth.login": "Login", "auth.register": "Register", "common.back": "Back"
+            "hero.desc": "One-stop AI solutions empowering developers and creators globally.", "hero.btnStart": "Get Started", "hero.btnMore": "Learn More",
+            "stats.projects": "Active Projects", "stats.uptime": "Service Uptime", "stats.tokens": "Daily Tokens", "stats.rating": "User Rating",
+            "tokens.title": "Ai Compute Engine", "tokens.subtitle": "High-performance GPU clusters, pay-as-you-go, elastic scaling for your AI apps.", "tokens.perUnit": "/ 1K Tokens", "tokens.select": "Select Plan", "tokens.popular": "Most Popular",
+            "tokens.starterDesc": "For Individuals & Small Tests", "tokens.proDesc": "For Professional Teams & Production", "tokens.entDesc": "For Large Scale Enterprise",
+            "tokens.feat1": "Standard Inference Speed", "tokens.feat2": "7B Model Support", "tokens.feat3": "24/7 Tech Support",
+            "tokens.feat4": "High-Performance Inference", "tokens.feat5": "70B+ Model Support", "tokens.feat6": "Dedicated Queue & Priority",
+            "tokens.feat7": "Ultra-Fast Inference", "tokens.feat8": "Multimodal Support", "tokens.feat9": "Private Deployment & SLA",
+            "tokens.keyTitle": "Unified Key: One Key for multiple models, easier access/switch",
+            "tokens.matrixTitle": "Model Pricing Matrix", "tokens.matrixSub": "Vs. Official Pricing",
+            "tokens.gptDesc": "Official resource access, core cost advantage", "tokens.seedDesc": "Latest vision model adaptation", "tokens.glmDesc": "Zhipu AI strategic partner", "tokens.off": "OFF",
+            "studio.title": "Ai Studio", "studio.subtitle": "Text, Image, Audio, and Video generation in one integrated AI toolkit.",
+            "studio.text": "Text Gen", "studio.textSub": "Smart Copywriting, Translation", "studio.image": "Image Gen", "studio.imageSub": "Text-to-Image, Upscaling", "studio.audio": "Audio Gen", "studio.audioSub": "TTS, Voice Conversion", "studio.video": "Video Gen", "studio.videoSub": "Digital Human, Auto-Editing",
+            "agents.title": "Ai Agent Clusters", "agents.subtitle": "Personalized assistants executing tasks 24/7 automatically.",
+            "agents.gen": "General Agent", "agents.genDesc": "QA, Planning, Summarization", "agents.coder": "Coding Agent", "agents.coderDesc": "Gen, Debug, Optimization", "agents.designer": "Design Agent", "agents.designerDesc": "Creative, Layout, Style Tips", "agents.market": "Marketing Agent", "agents.marketDesc": "Copy, Strategy, Campaigns",
+            "about.title": "About Us", "about.subtitle": "YuYu Tech · Empowering AI Innovation", "about.introTitle": "Company Profile",
+            "about.introContent1": "YuYu Technology is a cutting-edge enterprise focused on AI R&D and application across compute, creation, and agent sectors.",
+            "about.introContent2": "Powered by our elastic scheduling and multimodal AI, we deliver professional, lightweight, and cost-effective AI solutions.",
+            "about.coreTitle": "Core Business Systems", "about.core1": "High-end hardware supporting full-scale LLM inference.", "about.core2": "Integrated text, image, audio, and video capabilities.", "about.core3": "Hardware + AI Agent matrix for office automation.",
+            "about.teamTitle": "Team Strength", "about.teamContent": "Composed of senior experts in algorithms, cloud, and engineering with full R&D capabilities.",
+            "about.visionTitle": "Corporate Vision", "about.visionContent": "To be the leading lightweight AI platform empowering every creator and enterprise worldwide.",
+            "about.v1": "Innovation", "about.v2": "User First", "about.v3": "Practicality", "about.v4": "Inclusivity",
+            "auth.login": "Login", "auth.register": "Register", "auth.email": "Email", "auth.pass": "Password", "common.back": "Back", "common.online": "Online",
+            "sub.tourTitle": "Platform Tour", "sub.tourDesc": "AI·JuLi One-stop AI Service Platform", "sub.tourStart": "Quick Start", "sub.tourSteps": "Register → Select Service → Start Using → Manage Projects", "sub.tourShield": "Security", "sub.tourShieldDesc": "Encrypted transfer, privacy protection, compliance",
+            "sub.missionTitle": "Our Mission", "sub.missionDesc": "Make AI technology accessible to everyone and every enterprise", "sub.vision": "Vision", "sub.visionDesc": "To become a world-leading AI productivity platform driving innovation.", "sub.values": "Values", "sub.valuesList": "<li>User First</li><li>Innovation</li><li>Collaboration</li><li>Growth</li>"
         }
     };
 
@@ -453,7 +615,6 @@
     const subContainer = document.getElementById('subpage-container');
     const subContent = document.getElementById('subContent');
 
-    // Section Switching
     document.querySelectorAll('[data-section]').forEach(link => {
         link.addEventListener('click', () => {
             const sec = link.dataset.section;
@@ -464,12 +625,13 @@
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
             link.classList.add('active');
             document.getElementById('navLinks').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('active');
         });
     });
 
-    // Subpage Rendering
     document.querySelectorAll('[data-sub]').forEach(el => {
-        el.addEventListener('click', () => {
+        el.addEventListener('click', (e) => {
+            e.stopPropagation();
             const key = el.dataset.sub;
             renderSubPage(key);
             subContainer.classList.add('active');
@@ -484,14 +646,25 @@
     });
 
     function renderSubPage(key) {
-        let content = '';
-        const templates = {
-            'agent-coder': { title: '编程智能助手', desc: '全自动代码生成、重构与 Bug 修复', body: '<div class="sub-detail-grid"><div class="sub-detail-card"><h3><i class="fas fa-code"></i> 支持语言</h3><p>Python, JS/TS, Rust, Go, Java</p></div><div class="sub-detail-card"><h3><i class="fas fa-bug"></i> 自动修复</h3><p>一键扫描代码缺陷并自动生成 Patch。</p></div></div>' },
-            'token-pro': { title: '专业算力套餐', desc: '最高性能 GPU 集群，支持极速推理', body: '<div class="sub-specs"><div class="spec-item"><strong>显存</strong><br>80GB</div><div class="spec-item"><strong>带宽</strong><br>2.5TB/s</div></div>' },
-            'team-lead': { title: '创始人/创始人团队', desc: '科技愿景驱动，深耕 AI 领域 10 年', body: '<p>致力于打破算力与创意之间的最后一道屏障。</p>' }
-        };
-        const data = templates[key] || { title: '详情内容', desc: '内容正在准备中...', body: '' };
-        subContent.innerHTML = `<div class="sub-header"><h1>${data.title}</h1><p>${data.desc}</p></div>${data.body}`;
+        const lang = currentLang;
+        let htmlContent = '';
+        const getT = (k) => i18n[lang][k];
+
+        switch(key) {
+            case 'home-tour':
+                htmlContent = `<div class="sub-header"><h1>${getT('sub.tourTitle')}</h1><p>${getT('sub.tourDesc')}</p></div>
+                    <div class="sub-detail-grid"><div class="sub-detail-card"><h3><i class="fas fa-rocket"></i> ${getT('sub.tourStart')}</h3><p>${getT('sub.tourSteps')}</p></div>
+                    <div class="sub-detail-card"><h3><i class="fas fa-shield-alt"></i> ${getT('sub.tourShield')}</h3><p>${getT('sub.tourShieldDesc')}</p></div></div>`;
+                break;
+            case 'home-mission':
+                htmlContent = `<div class="sub-header"><h1>${getT('sub.missionTitle')}</h1><p>${getT('sub.missionDesc')}</p></div>
+                    <div class="sub-detail-grid"><div class="sub-detail-card"><h3><i class="fas fa-lightbulb"></i> ${getT('sub.vision')}</h3><p>${getT('sub.visionDesc')}</p></div>
+                    <div class="sub-detail-card"><h3><i class="fas fa-heart"></i> ${getT('sub.values')}</h3><ul>${getT('sub.valuesList')}</ul></div></div>`;
+                break;
+            default:
+                htmlContent = `<div class="sub-header"><h1>${getT('about.title')}</h1><p>Content for ${key} coming soon in ${lang}.</p></div>`;
+        }
+        subContent.innerHTML = htmlContent;
     }
 
     // Navbar Scroll Effect
@@ -522,6 +695,15 @@
         document.getElementById('hamburger').classList.toggle('active');
         document.getElementById('navLinks').classList.toggle('open');
     }
+
+    document.getElementById('logoHome').addEventListener('click', () => {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById('section-home').classList.add('active');
+        lastActiveSection = 'section-home';
+        subContainer.classList.remove('active');
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        document.querySelector('[data-section="home"]').classList.add('active');
+    });
 </script>
 </body>
 </html>
