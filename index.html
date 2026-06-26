@@ -11,20 +11,19 @@
             --primary-light: #8B83FF;
             --secondary: #00D4FF;
             --bg-dark: #0A0A1A;
-            --bg-card: rgba(255, 255, 255, 0.04);
-            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
             --text-white: #FFFFFF;
-            --text-muted: rgba(255, 255, 255, 0.6);
-            --border-glow: rgba(108, 99, 255, 0.2);
-            --radius: 20px; 极速更新
-            --shadow-glow: 0 15px 40px rgba(108, 99, 255, 0.1);
+            --text-muted: rgba(255, 255, 255, 0.65);
+            --border-glow: rgba(108, 99, 255, 0.25);
+            --radius: 20px;
+            --shadow-glow: 0 10px 30px rgba(0, 0, 0, 0.3);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --font-sans: 'Inter', 'SF Pro Display', -apple-system, system-ui, sans-serif;
         }
 
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
+        html { scroll-behavior: smooth; font-size: 16px; height: -webkit-fill-available; }
         body {
             font-family: var(--font-sans);
             background: var(--bg-dark);
@@ -35,3 +34,388 @@
             width: 100%;
         }
 
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 0 5%; height: 72px;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(10, 10, 26, 0.6);
+            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
+        }
+        .navbar.scrolled { background: rgba(10, 10, 26, 0.95); height: 64px; }
+
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; cursor: pointer; z-index: 1100; }
+        .nav-logo i { color: var(--secondary); font-size: 22px; }
+
+        .nav-links { display: flex; align-items: center; gap: 4px; position: absolute; left: 50%; transform: translateX(-50%); }
+        .nav-links a {
+            padding: 8px 16px; border-radius: 40px; font-size: 14px; font-weight: 600;
+            color: var(--text-muted); transition: var(--transition); cursor: pointer;
+        }
+        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255, 255, 255, 0.08); }
+        .nav-links a.active { color: var(--primary-light); background: rgba(108, 99, 255, 0.1); }
+
+        .nav-actions { display: flex; align-items: center; gap: 15px; z-index: 1100; }
+        .lang-btn {
+            display: flex; align-items: center; gap: 6px; padding: 7px 14px;
+            border-radius: 40px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff; font-size: 12px; cursor: pointer; font-weight: 600;
+        }
+        .lang-dropdown {
+            position: absolute; top: 120%; right: 0; min-width: 140px;
+            background: #121228; border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 6px; opacity: 0; visibility: hidden;
+            transform: translateY(10px); transition: 0.3s; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .lang-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lang-dropdown button { width: 100%; padding: 10px 12px; background: none; border: none; color: var(--text-muted); font-size: 13px; text-align: left; cursor: pointer; border-radius: 10px; }
+        .lang-dropdown button:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+        .btn { padding: 9px 20px; border-radius: 50px; font-size: 13px; font-weight: 700; cursor: pointer; transition: var(--transition); border: none; outline: none; }
+        .btn-register { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; }
+        .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255, 255, 255, 0.3) !important; }
+        .btn-outline:hover { border-color: #fff !important; background: rgba(255,255,255,0.05); }
+
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 10px; flex-direction: column; gap: 6px; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -5px); }
+
+        /* Typography & Layout Optimization */
+        .section { padding: 100px 5% 60px; max-width: 1200px; margin: 0 auto; display: none; }
+        .section.active { display: block; animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-title { font-size: clamp(24px, 3.5vw, 36px); font-weight: 800; margin-bottom: 15px; letter-spacing: -0.01em; }
+        .section-subtitle { color: var(--text-muted); font-size: clamp(14px, 1.2vw, 16px); margin-bottom: 40px; max-width: 800px; }
+
+        /* Hero Fix */
+        .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero h1 { font-size: clamp(34px, 6vw, 64px); font-weight: 900; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.03em; }
+        .highlight { background: linear-gradient(135deg, var(--primary-light), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: clamp(16px, 1.8vw, 19px); color: var(--text-muted); max-width: 600px; margin-bottom: 35px; }
+        .hero-actions { display: flex; gap: 12px; }
+        .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 20px; margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.06); }
+        .hero-stats h3 { font-size: 28px; font-weight: 800; color: var(--secondary); margin-bottom: 3px; }
+        .hero-stats p { font-size: 12px; color: var(--text-muted); }
+
+        /* Card & Button Contrast Fix */
+        .grid-layout { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+        .card { 
+            background: #15152a; border: 1px solid rgba(255,255,255,0.06); 
+            border-radius: var(--radius); padding: 30px; transition: var(--transition); 
+            cursor: pointer; position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--border-glow); background: #1a1a35; }
+        .card h3 { font-size: 18px; font-weight: 750; margin-bottom: 10px; }
+        .card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+        .card ul { margin: 15px 0; flex-grow: 1; }
+        .card li { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; color: var(--text-muted); font-size: 12.5px; }
+        .card li i { color: var(--secondary); font-size: 11px; }
+        .card .badge { position: absolute; top: 0; right: 0; background: var(--primary); color: #fff; padding: 4px 10px; border-bottom-left-radius: 12px; font-size: 10px; font-weight: 800; }
+        
+        /* View Detail Button Contrast */
+        .btn-detail { 
+            background: rgba(255, 255, 255, 0.08); color: #fff; font-weight: 700; 
+            border: 1px solid rgba(255,255,255,0.1) !important; margin-top: 15px; width: 100%;
+        }
+        .btn-detail:hover { background: var(--primary); border-color: var(--primary) !important; }
+
+        /* Price Matrix */
+        .price-matrix { margin-top: 40px; padding: 30px; background: rgba(255,255,255,0.02); border-radius: 20px; border: 1px solid rgba(255,255,255,0.04); }
+        .matrix-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .matrix-item:last-child { border-bottom: none; }
+        .matrix-item h4 { font-size: 16px; font-weight: 700; }
+        .matrix-val { font-size: 20px; font-weight: 850; color: var(--secondary); }
+
+        /* About Section Full & Safe Wrapping */
+        .about-box { padding: 30px; background: #15152a; border-radius: 20px; border: 1px solid rgba(255,255,255,0.06); margin-bottom: 20px; word-break: break-word; overflow-wrap: break-word; }
+        .about-box h3 { font-size: 20px; margin-bottom: 12px; color: var(--primary-light); }
+        .about-box p { font-size: 14.5px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.7; }
+        .about-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
+        .values-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .value-item { padding: 15px; background: rgba(255,255,255,0.03); border-radius: 12px; font-weight: 600; display: flex; align-items: center; gap: 10px; font-size: 14px; border: 1px solid rgba(255,255,255,0.04); }
+
+        /* Subpage & Menu Fix */
+        #subpage-container { display: none; padding: 100px 5% 80px; max-width: 1100px; margin: 0 auto; word-break: break-word; }
+        #subpage-container.active { display: block; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); cursor: pointer; margin-bottom: 30px; font-weight: 600; font-size: 14px; }
+        .back-btn:hover { color: #fff; }
+
+        /* Footer */
+        .footer { padding: 40px 5% 30px; border-top: 1px solid rgba(255,255,255,0.04); font-size: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; color: var(--text-muted); }
+        .socials { display: flex; gap: 15px; font-size: 16px; }
+
+        /* Modal Overlays */
+        .modal-overlay { 
+            position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.95); 
+            display: flex; align-items: center; justify-content: center; 
+            opacity: 0; visibility: hidden; pointer-events: none; transition: 0.3s; 
+        }
+        .modal-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
+        .modal-box { background: #0A0A1F; border: 1px solid var(--border-glow); border-radius: 24px; padding: 35px; width: 90%; max-width: 400px; position: relative; }
+        .close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
+
+        @media (max-width: 1024px) {
+            .nav-links { 
+                display: none; position: fixed; inset: 0; width: 100vw; height: 100vh;
+                background: #0A0A1A; flex-direction: column; justify-content: center; align-items: center; gap: 25px; z-index: 1050;
+                padding-top: env(safe-area-inset-top);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { font-size: 22px; }
+            .hamburger { display: flex; z-index: 1100; margin-left: 5px; }
+            .about-grid-3, .values-grid { grid-template-columns: 1fr; }
+            .grid-layout { grid-template-columns: 1fr; }
+            #registerBtn { display: none; }
+        }
+
+        @media (max-width: 380px) {
+            .section { padding-top: 90px; padding-left: 15px; padding-right: 15px; }
+            .section-title { font-size: 24px; }
+            .hero h1 { font-size: 32px; }
+            .card { padding: 25px 15px; }
+            .about-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="nav-logo" id="logoHome"><i class="fas fa-brain"></i> <span>AI·JuLi</span></div>
+    <div class="nav-links" id="navLinks">
+        <a data-section="home" class="active" data-i18n="nav.home">首页</a>
+        <a data-section="tokens" data-i18n="nav.tokens">Ai算力引擎</a>
+        <a data-section="studio" data-i18n="nav.studio">Ai Studio</a>
+        <a data-section="agents" data-i18n="nav.agents">Ai智能体</a>
+        <a data-section="about" data-i18n="nav.about">关于我们</a>
+    </div>
+    <div class="nav-actions">
+        <div class="lang-selector">
+            <button class="lang-btn" id="langBtn"><i class="fas fa-globe"></i> <span id="currentLangLabel">中文</span></button>
+            <div class="lang-dropdown" id="langDropdown">
+                <button data-lang="zh">🇨🇳 中文</button>
+                <button data-lang="en">🇬🇧 English</button>
+            </div>
+        </div>
+        <button class="btn btn-register trigger-reg" id="registerBtn" data-i18n="auth.register">注册账号</button>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<main class="main" id="mainContent">
+    <!-- Home -->
+    <section class="section active" id="section-home">
+        <div class="hero">
+            <h1 data-i18n="hero.title">释放 AI 的无限可能</h1>
+            <p data-i18n="hero.desc">从算力引擎到智能创作，一站式 AI 解决方案，赋能开发者与创作者。</p>
+            <div class="hero-actions">
+                <button class="btn btn-register trigger-reg" data-i18n="hero.btnStart">立即体验</button>
+                <button class="btn btn-outline trigger-reg" data-i18n="hero.btnMore">了解更多</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><h3>10K+</h3><p data-i18n="stats.projects">活跃项目</p></div>
+                <div class="stat-item"><h3>99.9%</h3><p data-i18n="stats.uptime">服务可用性</p></div>
+                <div class="stat-item"><h3>50M+</h3><p data-i18n="stats.tokens">每日 Token 处理</p></div>
+                <div class="stat-item"><h3>4.9★</h3><p data-i18n="stats.rating">用户评分</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokens -->
+    <section class="section" id="section-tokens">
+        <h2 class="section-title" data-i18n="tokens.title">Ai 算力引擎</h2>
+        <div class="grid-layout">
+            <div class="card">
+                <div style="font-size:28px;font-weight:800;margin-bottom:8px">$0.006 <span style="font-size:12px;color:var(--text-muted)">/ 1K</span></div>
+                <h3 data-i18n="tokens.starter">个人开发者 & 小规模测试</h3>
+                <ul>
+                    <li data-i18n="tokens.feat1"><i class="fas fa-check"></i>标准延迟流式推理</li>
+                    <li data-i18n="tokens.feat2"><i class="fas fa-check"></i>7B参数量级基座模型支持</li>
+                </ul>
+                <button class="btn btn-register trigger-reg" style="width:100%">选择方案</button>
+            </div>
+            <div class="card popular">
+                <div class="badge" data-i18n="tokens.popular">热门推荐</div>
+                <div style="font-size:28px;font-weight:800;margin-bottom:8px">$0.018 <span style="font-size:12px;color:var(--text-muted)">/ 1K</span></div>
+                <h3 data-i18n="tokens.pro">专业团队 & 生产级应用</h3>
+                <ul>
+                    <li data-i18n="tokens.feat4"><i class="fas fa-check"></i>低延迟高性能推理</li>
+                    <li data-i18n="tokens.feat5"><i class="fas fa-check"></i>7B~70B全梯度基座支持</li>
+                </ul>
+                <button class="btn btn-register trigger-reg" style="width:100%">选择方案</button>
+            </div>
+            <div class="card">
+                <div style="font-size:28px;font-weight:800;margin-bottom:8px">$0.042 <span style="font-size:12px;color:var(--text-muted)">/ 1K</span></div>
+                <h3 data-i18n="tokens.ent">企业级大规模部署</h3>
+                <ul>
+                    <li data-i18n="tokens.feat7"><i class="fas fa-check"></i>超低延迟超高速推理集群</li>
+                    <li data-i18n="tokens.feat9"><i class="fas fa-check"></i>私有化部署 + 99.99% SLA</li>
+                </ul>
+                <button class="btn btn-register trigger-reg" style="width:100%">选择方案</button>
+            </div>
+        </div>
+        <div class="price-matrix">
+            <h3 data-i18n="tokens.matrixTitle" style="margin-bottom:20px">模型价格矩阵</h3>
+            <div class="matrix-item"><div><h4>GPT-5.5 / 5.4</h4><p data-i18n="tokens.gptDesc">官方资源获取，核心成本优势</p></div><div class="matrix-val">3.0 <span style="font-size:14px" data-i18n="tokens.off">折起</span></div></div>
+            <div class="matrix-item"><div><h4>Seedance 2.0</h4><p data-i18n="tokens.seedDesc">最新的视觉模型适配技术</p></div><div class="matrix-val">8.5 <span style="font-size:14px" data-i18n="tokens.off">折起</span></div></div>
+            <div class="matrix-item"><div><h4>GLM 5.2</h4><p data-i18n="tokens.glmDesc">智谱 AI 核心合作伙伴</p></div><div class="matrix-val">8.5 <span style="font-size:14px" data-i18n="tokens.off">折起</span></div></div>
+        </div>
+    </section>
+
+    <!-- Studio -->
+    <section class="section" id="section-studio">
+        <h2 class="section-title" data-i18n="studio.title">Ai Studio 智能创作平台</h2>
+        <div class="grid-layout">
+            <div class="card" data-sub="st-text"><h3 data-i18n="studio.text">文本生成</h3><p data-i18n="studio.textD">文案、对话、代码、翻译、摘要</p><button class="btn btn-detail" data-i18n="common.view">查看详情</button></div>
+            <div class="card" data-sub="st-img"><h3 data-i18n="studio.img">图像创作</h3><p data-i18n="studio.imgD">文生图、高清修复、风格化、扩图</p><button class="btn btn-detail" data-i18n="common.view">查看详情</button></div>
+            <div class="card" data-sub="st-audio"><h3 data-i18n="studio.audio">音频处理</h3><p data-i18n="studio.audioD">多语种TTS、音色转换、降噪</p><button class="btn btn-detail" data-i18n="common.view">查看详情</button></div>
+            <div class="card" data-sub="st-video"><h3 data-i18n="studio.video">AI视频生成</h3><p data-i18n="studio.videoD">数字人、自动剪辑、特效生成</p><button class="btn btn-detail" data-i18n="common.view">查看详情</button></div>
+        </div>
+    </section>
+
+    <!-- Agents -->
+    <section class="section" id="section-agents">
+        <h2 class="section-title" data-i18n="agents.title">Ai Agents 专业化智能体矩阵</h2>
+        <div class="grid-layout">
+            <div class="card" data-sub="ag-gen"><h3 data-i18n="agents.gen">通用办公助手</h3><p data-i18n="agents.genD">总结、规划、问答、信息检索</p><button class="btn btn-detail" data-i18n="common.view">查看详情</button></div>
+            <div class="card" data-sub="ag-code"><h3 data-i18n="agents.coder">编程开发助手</h3><p data-i18n="agents.coderD">生成、修复、优化、自动化测试</p><button class="btn btn-detail" data-i18n="common.view">查看详情</button></div>
+            <div class="card" data-sub="ag-des"><h3 data-i18n="agents.des">创意设计助手</h3><p data-i18n="agents.desD">构图、配色、文案、素材生成</p><button class="btn btn-detail" data-i18n="common.view">查看详情</button></div>
+            <div class="card" data-sub="ag-mark"><h3 data-i18n="agents.mark">营销策划助手</h3><p data-i18n="agents.markD">文案、方案、策略、用户分析</p><button class="btn btn-detail" data-i18n="common.view">查看详情</button></div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="section-about">
+        <div class="about-box">
+            <h3 data-i18n="about.title">关于我们</h3>
+            <h4 data-i18n="about.h1" style="font-size:18px;margin-bottom:12px;color:var(--secondary)">企业简介</h4>
+            <p data-i18n="about.p1">羽宇科技聚焦人工智能核心技术研发，致力于打造全场景一站式AI生产力平台。依托自研弹性调度系统，提供从GPU支撑到自动化服务的全链路产品。</p>
+        </div>
+        <div class="about-grid-3">
+            <div class="about-box" style="margin:0"><h4>Ai算力引擎</h4><p data-i18n="about.c1">高端硬件支撑，全系列大模型推理微调。</p></div>
+            <div class="about-box" style="margin:0"><h4>Ai Studio</h4><p data-i18n="about.c2">整合多模态能力，零门槛AI创作方案。</p></div>
+            <div class="about-box" style="margin:0"><h4>Ai智能体</h4><p data-i18n="about.c3">自研智能硬件+矩阵，实现流程自动化。</p></div>
+        </div>
+        <div class="values-grid">
+            <div class="value-item"><i class="fas fa-lightbulb"></i> <span data-i18n="about.v1">技术创新</span></div>
+            <div class="value-item"><i class="fas fa-user-heart"></i> <span data-i18n="about.v2">用户至上</span></div>
+            <div class="value-item"><i class="fas fa-seedling"></i> <span data-i18n="about.v3">务实笃行</span></div>
+            <div class="value-item"><i class="fas fa-hand-holding-heart"></i> <span data-i18n="about.v4">开放普惠</span></div>
+        </div>
+    </section>
+
+    <!-- Subpage -->
+    <div id="subpage-container">
+        <div class="back-btn" id="subBackBtn"><i class="fas fa-arrow-left"></i> <span data-i18n="common.back">返回</span></div>
+        <div id="subContent"></div>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>© 2026 AI·JuLi 羽宇科技. All Rights Reserved.</p>
+    <div class="socials"><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
+</footer>
+
+<div class="modal-overlay" id="registerModal">
+    <div class="modal-box">
+        <button class="close-btn" id="closeReg"><i class="fas fa-times"></i></button>
+        <h2 data-i18n="auth.register" style="margin-bottom:20px;font-size:22px">注册账号</h2>
+        <div style="margin-bottom:20px">
+            <label style="display:block;margin-bottom:8px;font-size:14px;color:var(--text-muted)" data-i18n="auth.email">邮箱</label>
+            <input type="email" placeholder="your@email.com" style="width:100%;padding:12px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;outline:none">
+        </div>
+        <button class="btn btn-register" style="width:100%;padding:14px">立即注册</button>
+    </div>
+</div>
+
+<script>
+    const i18n = {
+        zh: {
+            "nav.home": "首页", "nav.tokens": "Ai算力引擎", "nav.studio": "Ai Studio", "nav.agents": "Ai智能体", "nav.about": "关于我们",
+            "hero.title": "释放 AI 的无限可能", "hero.desc": "从算力引擎到智能创作，一站式 AI 解决方案，赋能开发者与创作者。", "hero.btnStart": "立即体验", "hero.btnMore": "了解更多",
+            "stats.projects": "活跃项目", "stats.uptime": "服务可用性", "stats.tokens": "每日 Token 处理", "stats.rating": "用户评分",
+            "tokens.title": "Ai 算力引擎", "tokens.starter": "个人开发者 & 小规模测试", "tokens.pro": "专业团队 & 生产级应用", "tokens.ent": "企业级大规模部署",
+            "tokens.feat1": "标准延迟流式推理", "tokens.feat2": "7B参数量级支持", "tokens.feat4": "低延迟高性能推理", "tokens.feat5": "7B~70B全梯度基座支持", "tokens.feat7": "超低延迟超高速推理", "tokens.feat9": "私有化部署 + 99.99% SLA",
+            "tokens.select": "选择方案", "tokens.popular": "热门推荐", "tokens.off": "折起", "tokens.matrixTitle": "模型价格矩阵",
+            "tokens.gptDesc": "官方资源获取，核心成本优势", "tokens.seedDesc": "最新的视觉模型适配技术", "tokens.glmDesc": "智谱 AI 核心合作伙伴",
+            "studio.title": "Ai Studio 智能创作平台", "studio.text": "文本生成", "studio.textD": "文案、对话、代码、翻译、摘要", "studio.img": "图像创作", "studio.imgD": "文生图、修复、风格化、扩图", "studio.audio": "音频处理", "studio.audioD": "多语种TTS、音色转换、降噪", "studio.video": "AI视频生成", "studio.videoD": "数字人播报、自动剪辑、特效",
+            "agents.title": "Ai Agents 专业化智能体矩阵", "agents.gen": "通用办公助手", "agents.genD": "总结、规划、问答、检索", "agents.coder": "编程开发助手", "agents.coderD": "生成、修复、优化、测试", "agents.des": "创意设计助手", "agents.desD": "构图、配色、文案、素材", "agents.mark": "营销策划助手", "agents.markD": "文案、方案、策略、分析",
+            "about.title": "关于我们", "about.h1": "企业简介", "about.p1": "羽宇科技聚焦人工智能核心技术研发，致力于打造全场景一站式AI生产力平台。", "about.c1": "支持高端硬件推理微调。", "about.c2": "零门槛AI创作方案。", "about.c3": "办公与开发自动化。", "about.v1": "技术创新", "about.v2": "用户至上", "about.v3": "务实笃行", "about.v4": "开放普惠",
+            "auth.register": "注册账号", "auth.email": "邮箱", "common.back": "返回", "common.view": "查看详情"
+        },
+        en: {
+            "nav.home": "Home", "nav.tokens": "Tokens", "nav.studio": "Ai Studio", "nav.agents": "Ai Agents", "nav.about": "About Us",
+            "hero.title": "Unleash AI Potential", "hero.desc": "One-stop AI solutions for creators globally.", "hero.btnStart": "Get Started", "hero.btnMore": "Learn More",
+            "stats.projects": "Projects", "stats.uptime": "Uptime", "stats.tokens": "Daily Tokens", "stats.rating": "Rating",
+            "tokens.title": "Compute Engine", "tokens.starter": "Individual & Testing", "tokens.pro": "Professional & Production", "tokens.ent": "Enterprise Scale",
+            "tokens.feat1": "Standard Stream", "tokens.feat2": "7B Model Support", "tokens.feat4": "High-Performance", "tokens.feat5": "70B+ Base Models", "tokens.feat7": "Ultra-Fast Clusters", "tokens.feat9": "99.99% SLA",
+            "tokens.select": "Select", "tokens.popular": "Popular", "tokens.off": "OFF", "tokens.matrixTitle": "Pricing Matrix",
+            "tokens.gptDesc": "Official access, cost-effective", "tokens.seedDesc": "Latest vision model tech", "tokens.glmDesc": "Zhipu AI Strategic Partner",
+            "studio.title": "Ai Studio Platform", "studio.text": "Text Gen", "studio.textD": "Copy, Code, Translation", "studio.img": "Image Gen", "studio.imgD": "T2I, Style, Upscale", "studio.audio": "Audio Pro", "studio.audioD": "TTS, Clone, Denoiser", "studio.video": "Video Gen", "studio.videoD": "Digital Human, Auto-Edit",
+            "agents.title": "Ai Agents Matrix", "agents.gen": "Office Agent", "agents.genD": "Summary, Plan, QA", "agents.coder": "Coding Agent", "agents.coderD": "Gen, Debug, Optimize", "agents.des": "Design Agent", "agents.desD": "Layout, Color, Copy", "agents.mark": "Marketing Agent", "agents.markD": "Campaign, Strategy",
+            "about.title": "About Us", "about.h1": "Profile", "about.p1": "YuYu Tech builds one-stop AI productivity platforms via proprietary R&D.", "about.c1": "GPU clusters for fine-tuning.", "about.c2": "Zero-entry creative tools.", "about.c3": "Workflow automation.", "about.v1": "Innovation", "about.v2": "User First", "about.v3": "Practical", "about.v4": "Inclusive",
+            "auth.register": "Register", "auth.email": "Email", "common.back": "Back", "common.view": "Details"
+        }
+    };
+
+    let currentLang = 'zh';
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburger');
+    const sections = document.querySelectorAll('.section');
+    const subContainer = document.getElementById('subpage-container');
+    const registerModal = document.getElementById('registerModal');
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (i18n[lang][key]) el.innerText = i18n[lang][key];
+        });
+        document.getElementById('currentLangLabel').innerText = lang === 'zh' ? '中文' : 'English';
+        document.getElementById('langDropdown').classList.remove('open');
+    }
+
+    hamburger.onclick = () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('open'); document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : ''; }
+
+    document.querySelectorAll('[data-section]').forEach(link => {
+        link.onclick = () => {
+            const sec = link.dataset.section;
+            sections.forEach(s => s.classList.remove('active'));
+            document.getElementById('section-' + sec).classList.add('active');
+            subContainer.classList.remove('active');
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            link.classList.add('active');
+            navLinks.classList.remove('open'); hamburger.classList.remove('active'); document.body.style.overflow = '';
+            window.scrollTo(0, 0);
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        const subEl = e.target.closest('[data-sub]');
+        const regEl = e.target.closest('.trigger-reg');
+        if (regEl) { registerModal.classList.add('open'); return; }
+        if (subEl) {
+            const key = subEl.dataset.sub;
+            subContainer.classList.add('active');
+            sections.forEach(s => s.classList.remove('active'));
+            const title = i18n[currentLang][`sd.${key}T`] || subEl.querySelector('h3').innerText;
+            document.getElementById('subContent').innerHTML = `<div class='about-box'><h3>${title}</h3><p>详细内容同步中...</p></div>`;
+            window.scrollTo(0, 0);
+        }
+    });
+
+    document.getElementById('subBackBtn').onclick = () => { subContainer.classList.remove('active'); document.querySelector('.nav-links a.active').click(); }
+    document.getElementById('logoHome').onclick = () => document.querySelector('[data-section="home"]').click();
+    document.getElementById('langBtn').onclick = (e) => { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('open'); }
+    document.querySelectorAll('#langDropdown button').forEach(b => b.onclick = () => setLanguage(b.dataset.lang));
+    document.getElementById('closeReg').onclick = () => registerModal.classList.remove('open');
+    window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) registerModal.classList.remove('open'); }
+    window.onscroll = () => { if (window.scrollY > 50) document.getElementById('navbar').classList.add('scrolled'); else document.getElementById('navbar').classList.remove('scrolled'); }
+</script>
+</body>
+</html>
