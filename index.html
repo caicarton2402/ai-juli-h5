@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI·JuLi · 羽宇科技</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-light: #8B83FF;
+            --secondary: #00D4FF;
+            --bg-dark: #0A0A1A;
+            --bg-card: rgba(255, 255, 255, 0.06);
+            --bg-card-hover: rgba(255, 255, 255, 0.10);
+            --text-white: #FFFFFF;
+            --text-muted: rgba(255, 255, 255, 0.70);
+            --border-glow: rgba(108, 99, 255, 0.30);
+            --radius: 20px;
+            --shadow-glow: 0 20px 60px rgba(108, 99, 255, 0.15);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-dark);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 0 40px; height: 72px;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(10, 10, 26, 0.82);
+            backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
+        }
+        .navbar.scrolled {
+            background: rgba(10, 10, 26, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.40);
+        }
+
+        .nav-logo {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 22px; font-weight: 700; cursor: pointer;
+        }
+        .nav-logo i { color: var(--secondary); font-size: 28px; }
+        .nav-logo span {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 8px; }
+        .nav-links a {
+            padding: 8px 18px; border-radius: 40px;
+            font-size: 14px; font-weight: 500; color: var(--text-muted);
+            transition: var(--transition); cursor: pointer;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-white); background: rgba(255, 255, 255, 0.06);
+        }
+        .nav-links a.active {
+            background: rgba(108, 99, 255, 0.20); color: var(--primary-light);
+        }
+
+        .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+        /* Language Selector */
+        .lang-selector { position: relative; }
+        .lang-btn {
+            display: flex; align-items: center; gap: 6px;
+            padding: 8px 14px; border-radius: 40px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted); font-size: 13px;
+            cursor: pointer; transition: var(--transition);
+        }
+        .lang-btn:hover { background: rgba(255, 255, 255, 0.12); color: var(--text-white); }
+        .lang-dropdown {
+            position: absolute; top: calc(100% + 10px); right: 0;
+            min-width: 140px; background: rgba(18, 18, 40, 0.96);
+            backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px; padding: 8px 0; opacity: 0; visibility: hidden;
+            transform: translateY(8px) scale(0.96); transition: var(--transition);
+        }
+        .lang-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .lang-dropdown button {
+            display: flex; align-items: center; gap: 10px; width: 100%;
+            padding: 10px 20px; background: none; border: none;
+            color: var(--text-muted); font-size: 14px; cursor: pointer; text-align: left;
+        }
+        .lang-dropdown button:hover { background: rgba(255, 255, 255, 0.06); color: var(--text-white); }
+
+        /* Buttons */
+        .auth-btns { display: flex; gap: 8px; }
+        .btn {
+            padding: 8px 22px; border-radius: 40px; font-size: 14px;
+            font-weight: 600; border: none; cursor: pointer; transition: var(--transition);
+        }
+        .btn-login { background: transparent; color: var(--text-muted); border: 1px solid rgba(255, 255, 255, 0.12) !important; }
+        .btn-login:hover { background: rgba(255, 255, 255, 0.06); color: var(--text-white); }
+        .btn-register {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff; box-shadow: 0 4px 20px rgba(108, 99, 255, 0.30);
+        }
+        .btn-register:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(108, 99, 255, 0.45); }
+
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 8px;
+        }
+        .hamburger span { display: block; width: 26px; height: 2px; background: var(--text-white); border-radius: 4px; transition: var(--transition); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* Main Sections */
+        .main { padding-top: 72px; }
+        .section {
+            padding: 100px 40px 80px; max-width: 1280px;
+            margin: 0 auto; min-height: 100vh; display: none;
+        }
+        .section.active { display: block; animation: fadeUp 0.5s ease; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 44px; font-weight: 700; margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-white), var(--primary-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .section-subtitle { font-size: 18px; color: var(--text-muted); max-width: 600px; margin-bottom: 48px; }
+
+        /* Hero */
+        .hero { display: flex; flex-direction: column; justify-content: center; min-height: calc(100vh - 72px); }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 20px; border-radius: 40px; background: rgba(108, 99, 255, 0.15);
+            border: 1px solid rgba(108, 99, 255, 0.20); font-size: 13px; color: var(--primary-light); margin-bottom: 28px; width: fit-content;
+        }
+        .hero h1 { font-size: 68px; font-weight: 800; line-height: 1.08; margin-bottom: 24px; }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 20px; color: var(--text-muted); max-width: 560px; margin-bottom: 36px; }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn-primary-global {
+            padding: 14px 40px; border-radius: 60px; font-size: 16px; font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff; cursor: pointer; border: none; transition: var(--transition);
+        }
+        .btn-primary-global:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(108, 99, 255, 0.45); }
+        .btn-outline {
+            padding: 14px 40px; border-radius: 60px; font-size: 16px; font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15); background: transparent;
+            color: var(--text-white); cursor: pointer; transition: var(--transition);
+        }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.06); }
+
+        .hero-stats {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 30px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .hero-stats h3 { font-size: 36px; background: linear-gradient(135deg, var(--primary-light), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Grid layouts */
+        .card-grid, .pricing-grid, .showcase-grid, .agent-grid {
+            display: grid; gap: 28px; margin-top: 20px;
+        }
+        .card-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+        .pricing-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .showcase-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        .agent-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+        .card, .pricing-card, .showcase-item, .agent-card, .team-member {
+            background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius); padding: 30px; transition: var(--transition); cursor: pointer;
+        }
+        .card:hover, .pricing-card:hover, .showcase-item:hover, .agent-card:hover, .team-member:hover {
+            background: var(--bg-card-hover); transform: translateY(-6px); border-color: rgba(108, 99, 255, 0.20); box-shadow: var(--shadow-glow);
+        }
+
+        .pricing-card.popular { border-color: var(--primary); background: rgba(108, 99, 255, 0.08); }
+        .pricing-card .price { font-size: 44px; font-weight: 700; margin: 16px 0; }
+        .pricing-card ul { text-align: left; margin: 20px 0; }
+        .pricing-card ul li { margin: 8px 0; font-size: 14px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
+        .pricing-card ul li i { color: var(--secondary); }
+
+        .showcase-item { text-align: center; aspect-ratio: 1/1; display: flex; flex-direction: column; justify-content: center; }
+        .showcase-item i { font-size: 48px; color: var(--secondary); margin-bottom: 16px; }
+
+        .agent-card { text-align: center; }
+        .agent-card .avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+        .agent-card .status { display: inline-block; margin-top: 12px; padding: 4px 14px; border-radius: 40px; font-size: 12px; background: rgba(0, 212, 255, 0.12); color: var(--secondary); }
+
+        /* About & Team */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .team-member { text-align: center; padding: 20px; }
+        .team-member .avatar-small { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-light), var(--secondary)); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+
+        /* Subpage System */
+        #subpage-container {
+            display: none; padding: 100px 40px 80px; max-width: 1280px; margin: 0 auto; min-height: 100vh;
+        }
+        #subpage-container.active { display: block; animation: fadeUp 0.4s ease; }
+        .sub-back-btn {
+            display: inline-flex; align-items: center; gap: 10px; padding: 10px 24px;
+            border-radius: 40px; border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.04); color: var(--text-muted); cursor: pointer; margin-bottom: 40px;
+        }
+        .sub-header h1 { font-size: 44px; font-weight: 700; margin-bottom: 12px; background: linear-gradient(135deg, var(--text-white), var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .sub-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; }
+        .sub-detail-card { background: var(--bg-card); border-radius: var(--radius); padding: 32px; border: 1px solid rgba(255, 255, 255, 0.06); }
+        .sub-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+        .sub-specs .spec-item { background: rgba(255, 255, 255, 0.04); padding: 12px; border-radius: 12px; font-size: 14px; border-left: 2px solid var(--primary); }
+
+        /* Footer */
+        .footer { border-top: 1px solid rgba(255, 255, 255, 0.06); padding: 40px; max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; color: var(--text-muted); }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 2000; background: rgba(0, 0, 0, 0.70);
+            backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: var(--transition);
+        }
+        .modal-overlay.open { opacity: 1; visibility: visible; }
+        .modal-box {
+            background: rgba(18, 18, 40, 0.96); border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 28px; padding: 40px; max-width: 400px; width: 90%; transform: scale(0.96); transition: var(--transition); position: relative;
+        }
+        .modal-overlay.open .modal-box { transform: scale(1); }
+        .modal-box .close-btn { position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; }
+        .modal-box .form-group { margin-bottom: 18px; }
+        .modal-box label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+        .modal-box input { width: 100%; padding: 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: #fff; outline: none; }
+        .btn-submit { width: 100%; padding: 14px; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; font-weight: 600; border: none; cursor: pointer; margin-top: 10px; }
+
+        /* Responsive */
+        @media (max-width: 820px) {
+            .navbar { padding: 0 20px; }
+            .nav-links {
+                position: fixed; top: 72px; left: 0; right: 0; flex-direction: column;
+                background: rgba(10, 10, 26, 0.98); padding: 20px; transform: translateY(-120%); opacity: 0; transition: var(--transition);
+            }
+            .nav-links.open { transform: translateY(0); opacity: 1; }
+            .hamburger { display: flex; }
+            .hero h1 { font-size: 40px; }
+            .about-grid, .sub-detail-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="nav-logo" id="logoHome">
+        <i class="fas fa-brain"></i>
+        <span>AI·JuLi</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a data-section="home" class="active" data-i18n="nav.home">首页</a>
+        <a data-section="tokens" data-i18n="nav.tokens">算力引擎</a>
+        <a data-section="studio" data-i18n="nav.studio">AI 创作</a>
+        <a data-section="agents" data-i18n="nav.agents">智能体</a>
+        <a data-section="about" data-i18n="nav.about">关于我们</a>
+    </div>
+    <div class="nav-actions">
+        <div class="lang-selector">
+            <button class="lang-btn" id="langBtn">
+                <i class="fas fa-globe"></i>
+                <span id="currentLangLabel">中文</span>
+                <i class="fas fa-chevron-down" style="font-size:10px;"></i>
+            </button>
+            <div class="lang-dropdown" id="langDropdown">
+                <button data-lang="zh">🇨🇳 中文</button>
+                <button data-lang="en">🇬🇧 English</button>
+            </div>
+        </div>
+        <div class="auth-btns">
+            <button class="btn btn-login" id="loginBtn" data-i18n="auth.login">登录</button>
+            <button class="btn btn-register" id="registerBtn" data-i18n="auth.register">注册</button>
+        </div>
+        <button class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<main class="main" id="mainContent">
+    <section class="section active" id="section-home">
+        <div class="hero">
+            <div class="hero-badge"><i class="fas fa-sparkles"></i> <span data-i18n="hero.badge">下一代 AI 智能平台</span></div>
+            <h1 data-i18n="hero.title">释放<br><span class="highlight">AI 的无限可能</span></h1>
+            <p data-i18n="hero.desc">从算力引擎到智能创作，一站式 AI 解决方案，赋能开发者与创作者。</p>
+            <div class="hero-actions">
+                <button class="btn-primary-global" data-sub="home-tour" data-i18n="hero.btnStart">立即体验</button>
+                <button class="btn-outline" data-sub="home-mission" data-i18n="hero.btnMore">了解更多</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><h3>10K+</h3><p data-i18n="stats.projects">活跃项目</p></div>
+                <div class="stat-item"><h3>99.9%</h3><p data-i18n="stats.uptime">服务可用性</p></div>
+                <div class="stat-item"><h3>50M+</h3><p data-i18n="stats.tokens">每日处理</p></div>
+                <div class="stat-item"><h3>4.9★</h3><p data-i18n="stats.rating">用户评分</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="section-tokens">
+        <h2 class="section-title" data-i18n="tokens.title">AI 算力引擎</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card" data-sub="token-starter">
+                <div class="price">$0.008 <span>/ 1K</span></div>
+                <p data-i18n="tokens.starterDesc">个人开发者 & 小规模测试</p>
+                <button class="btn-submit" data-sub="token-starter" data-i18n="tokens.select">选择方案</button>
+            </div>
+            <div class="pricing-card popular" data-sub="token-pro">
+                <div class="price">$0.024 <span>/ 1K</span></div>
+                <p data-i18n="tokens.proDesc">专业团队 & 生产级应用</p>
+                <button class="btn-submit" data-sub="token-pro" data-i18n="tokens.select">选择方案</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="section-studio">
+        <h2 class="section-title" data-i18n="studio.title">AI 创作中心</h2>
+        <div class="showcase-grid">
+            <div class="showcase-item" data-sub="studio-text"><i class="fas fa-file-alt"></i><h4 data-i18n="studio.text">文本生成</h4></div>
+            <div class="showcase-item" data-sub="studio-image"><i class="fas fa-image"></i><h4 data-i18n="studio.image">图像创作</h4></div>
+            <div class="showcase-item" data-sub="studio-audio"><i class="fas fa-volume-up"></i><h4 data-i18n="studio.audio">音频处理</h4></div>
+            <div class="showcase-item" data-sub="studio-video"><i class="fas fa-video"></i><h4 data-i18n="studio.video">视频生成</h4></div>
+        </div>
+    </section>
+
+    <section class="section" id="section-agents">
+        <h2 class="section-title" data-i18n="agents.title">智能体集群</h2>
+        <div class="agent-grid">
+            <div class="agent-card" data-sub="agent-assistant"><div class="avatar"><i class="fas fa-robot"></i></div><h4 data-i18n="agents.gen">通用助手</h4><div class="status">Online</div></div>
+            <div class="agent-card" data-sub="agent-coder"><div class="avatar"><i class="fas fa-code"></i></div><h4 data-i18n="agents.coder">编程助手</h4><div class="status">Online</div></div>
+        </div>
+    </section>
+
+    <section class="section" id="section-about">
+        <h2 class="section-title" data-i18n="about.title">关于我们</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p data-i18n="about.p1">我们致力于打造最易用、最强大的 AI 生产力平台。</p>
+                <p data-i18n="about.p2">团队由来自人工智能、云计算领域的资深专家组成。</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member" data-sub="team-lead"><div class="avatar-small"><i class="fas fa-user"></i></div><h5 data-i18n="about.founder">创始人</h5></div>
+                <div class="team-member" data-sub="team-ai"><div class="avatar-small"><i class="fas fa-brain"></i></div><h5 data-i18n="about.aiTeam">AI 团队</h5></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="subpage-container">
+        <button class="sub-back-btn" id="subBackBtn"><i class="fas fa-arrow-left"></i> <span data-i18n="common.back">返回</span></button>
+        <div id="subContent"></div>
+    </div>
+</main>
+
+<div class="footer">
+    <div>© 2025 AI·JuLi 羽宇科技. All Rights Reserved.</div>
+    <div class="socials">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+</div>
+
+<!-- Modals -->
+<div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+        <button class="close-btn"><i class="fas fa-xmark"></i></button>
+        <h2 data-i18n="auth.login">登录</h2>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••"></div>
+        <button class="btn-submit" data-i18n="auth.login">登录</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="registerModal">
+    <div class="modal-box">
+        <button class="close-btn"><i class="fas fa-xmark"></i></button>
+        <h2 data-i18n="auth.register">注册</h2>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••"></div>
+        <button class="btn-submit" data-i18n="auth.register">注册</button>
+    </div>
+</div>
+
+<script>
+    // i18n Dictionary
+    const i18n = {
+        zh: {
+            "nav.home": "首页", "nav.tokens": "算力引擎", "nav.studio": "AI 创作", "nav.agents": "智能体", "nav.about": "关于我们",
+            "hero.badge": "下一代 AI 智能平台", "hero.title": "释放<br><span class='highlight'>AI 的无限可能</span>",
+            "hero.desc": "一站式 AI 解决方案，赋能开发者与创作者。", "hero.btnStart": "立即体验", "hero.btnMore": "了解更多",
+            "stats.projects": "活跃项目", "stats.uptime": "可用性", "stats.tokens": "每日处理", "stats.rating": "评分",
+            "tokens.title": "AI 算力引擎", "tokens.starterDesc": "个人开发者 & 测试", "tokens.proDesc": "专业团队 & 生产应用", "tokens.select": "选择方案",
+            "studio.title": "AI 创作中心", "studio.text": "文本生成", "studio.image": "图像创作", "studio.audio": "音频处理", "studio.video": "视频生成",
+            "agents.title": "智能体集群", "agents.gen": "通用助手", "agents.coder": "编程助手",
+            "about.title": "关于我们", "about.p1": "致力于打造最强大的 AI 平台。", "about.p2": "由资深 AI 专家团队组成。", "about.founder": "创始人", "about.aiTeam": "AI 团队",
+            "auth.login": "登录", "auth.register": "注册", "common.back": "返回"
+        },
+        en: {
+            "nav.home": "Home", "nav.tokens": "Compute", "nav.studio": "Studio", "nav.agents": "Agents", "nav.about": "About",
+            "hero.badge": "Next-Gen AI Platform", "hero.title": "Unlock<br><span class='highlight'>Infinite AI Power</span>",
+            "hero.desc": "One-stop AI solutions empowering developers and creators.", "hero.btnStart": "Get Started", "hero.btnMore": "Learn More",
+            "stats.projects": "Active Projects", "stats.uptime": "Uptime", "stats.tokens": "Daily Tokens", "stats.rating": "Rating",
+            "tokens.title": "AI Compute Engine", "tokens.starterDesc": "Individual & Testing", "tokens.proDesc": "Team & Production", "tokens.select": "Select Plan",
+            "studio.title": "AI Studio", "studio.text": "Text Gen", "studio.image": "Image Gen", "studio.audio": "Audio Gen", "studio.video": "Video Gen",
+            "agents.title": "AI Agents", "agents.gen": "General Agent", "agents.coder": "Coding Agent",
+            "about.title": "About Us", "about.p1": "Crafting the most powerful AI platform.", "about.p2": "Led by veteran AI experts.", "about.founder": "Founder", "about.aiTeam": "AI Team",
+            "auth.login": "Login", "auth.register": "Register", "common.back": "Back"
+        }
+    };
+
+    let currentLang = 'zh';
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (i18n[lang][key]) {
+                if (el.tagName === 'INPUT') el.placeholder = i18n[lang][key];
+                else el.innerHTML = i18n[lang][key];
+            }
+        });
+        document.getElementById('currentLangLabel').innerText = lang === 'zh' ? '中文' : 'English';
+        document.getElementById('langDropdown').classList.remove('open');
+    }
+
+    // Navigation & Logic
+    let lastActiveSection = 'section-home';
+    const subContainer = document.getElementById('subpage-container');
+    const subContent = document.getElementById('subContent');
+
+    // Section Switching
+    document.querySelectorAll('[data-section]').forEach(link => {
+        link.addEventListener('click', () => {
+            const sec = link.dataset.section;
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('section-' + sec).classList.add('active');
+            lastActiveSection = 'section-' + sec;
+            subContainer.classList.remove('active');
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            link.classList.add('active');
+            document.getElementById('navLinks').classList.remove('open');
+        });
+    });
+
+    // Subpage Rendering
+    document.querySelectorAll('[data-sub]').forEach(el => {
+        el.addEventListener('click', () => {
+            const key = el.dataset.sub;
+            renderSubPage(key);
+            subContainer.classList.add('active');
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            window.scrollTo(0, 0);
+        });
+    });
+
+    document.getElementById('subBackBtn').addEventListener('click', () => {
+        subContainer.classList.remove('active');
+        document.getElementById(lastActiveSection).classList.add('active');
+    });
+
+    function renderSubPage(key) {
+        let content = '';
+        const templates = {
+            'agent-coder': { title: '编程智能助手', desc: '全自动代码生成、重构与 Bug 修复', body: '<div class="sub-detail-grid"><div class="sub-detail-card"><h3><i class="fas fa-code"></i> 支持语言</h3><p>Python, JS/TS, Rust, Go, Java</p></div><div class="sub-detail-card"><h3><i class="fas fa-bug"></i> 自动修复</h3><p>一键扫描代码缺陷并自动生成 Patch。</p></div></div>' },
+            'token-pro': { title: '专业算力套餐', desc: '最高性能 GPU 集群，支持极速推理', body: '<div class="sub-specs"><div class="spec-item"><strong>显存</strong><br>80GB</div><div class="spec-item"><strong>带宽</strong><br>2.5TB/s</div></div>' },
+            'team-lead': { title: '创始人/创始人团队', desc: '科技愿景驱动，深耕 AI 领域 10 年', body: '<p>致力于打破算力与创意之间的最后一道屏障。</p>' }
+        };
+        const data = templates[key] || { title: '详情内容', desc: '内容正在准备中...', body: '' };
+        subContent.innerHTML = `<div class="sub-header"><h1>${data.title}</h1><p>${data.desc}</p></div>${data.body}`;
+    }
+
+    // Navbar Scroll Effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+
+    // Modal Controls
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+
+    document.getElementById('loginBtn').onclick = () => loginModal.classList.add('open');
+    document.getElementById('registerBtn').onclick = () => registerModal.classList.add('open');
+    document.querySelectorAll('.close-btn').forEach(btn => {
+        btn.onclick = () => { loginModal.classList.remove('open'); registerModal.classList.remove('open'); }
+    });
+
+    // Lang Dropdown
+    document.getElementById('langBtn').onclick = () => document.getElementById('langDropdown').classList.toggle('open');
+    document.querySelectorAll('#langDropdown button').forEach(btn => {
+        btn.onclick = () => setLanguage(btn.dataset.lang);
+    });
+
+    // Hamburger
+    document.getElementById('hamburger').onclick = () => {
+        document.getElementById('hamburger').classList.toggle('active');
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+</script>
+</body>
+</html>
