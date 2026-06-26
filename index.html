@@ -15,7 +15,7 @@
             --bg-card-hover: rgba(255, 255, 255, 0.08);
             --text-white: #FFFFFF;
             --text-muted: rgba(255, 255, 255, 0.65);
-            --border-glow: rgba(108, 99, 255, 0.25); <a></a>
+            --border-glow: rgba(108, 99, 255, 0.25);
             --radius: 20px;
             --shadow-glow: 0 10px 30px rgba(0, 0, 0, 0.3);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -300,61 +300,55 @@
 
     <!-- About -->
     <section class="section" id="section-about">
-        <!-- 标题 -->
-        <h2 class="section-title">羽宇科技 · 关于我们</h2>
+        <h2 class="section-title" data-i18n="about.pageTitle">羽宇科技 · 关于我们</h2>
 
-        <!-- 企业简介 -->
         <div class="about-box">
-            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)">企业简介</h3>
-            <p>羽宇科技，是一家聚焦人工智能核心技术研发与场景化落地的创新科技企业，深耕AI算力基建、AI智能创作、AI智能体三大核心赛道，致力于打造轻量化、高效率、全场景的一站式AI生产力平台。公司始终秉持"用AI创造价值，让技术服务于人"的核心理念，打破人工智能技术的使用壁垒，让前沿AI能力普惠个人创作者、开发者 with 各类企业用户。</p>
-            <p style="margin-top:12px">依托自主研发的弹性算力调度系统 with 多模态AI技术体系，羽宇科技构建了从底层GPU算力支撑、中端AI工具创作到上层智能体自动化服务的全链路产品矩阵。我们专注于轻量化部署、高性价比、极简操作体验，兼顾技术专业性 with 大众易用性，全方位适配个人学习创作、团队项目开发、企业规模化商用等多元场景。</p>
+            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)" data-i18n="about.s1Title">企业简介</h3>
+            <p data-i18n="about.s1p1">羽宇科技，是一家聚焦人工智能核心技术研发与场景化落地的创新科技企业，深耕AI算力基建、AI智能创作、AI智能体三大核心赛道，致力于打造轻量化、高效率、全场景的一站式AI生产力平台。公司始终秉持"用AI创造价值，让技术服务于人"的核心理念，打破人工智能技术的使用壁垒，让前沿AI能力普惠个人创作者、开发者与各类企业用户。</p>
+            <p style="margin-top:12px" data-i18n="about.s1p2">依托自主研发的弹性算力调度系统与多模态AI技术体系，羽宇科技构建了从底层GPU算力支撑、中端AI工具创作到上层智能体自动化服务的全链路产品矩阵。我们专注于轻量化部署、高性价比、极简操作体验，全方位适配个人学习创作、团队项目开发、企业规模化商用等多元场景。</p>
         </div>
 
-        <!-- 核心业务体系 -->
         <div class="about-box">
-            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)">核心业务体系</h3>
-            <p style="margin-bottom:20px">自成立以来，羽宇科技持续深耕人工智能落地应用，搭建三大核心业务板块，形成完整的AI服务生态：</p>
+            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)" data-i18n="about.s2Title">核心业务体系</h3>
+            <p style="margin-bottom:20px" data-i18n="about.s2Intro">自成立以来，羽宇科技持续深耕人工智能落地应用，搭建三大核心业务板块，形成完整的AI服务生态：</p>
             <div class="about-grid-3">
                 <div class="about-box" style="margin:0">
                     <h4 style="color:var(--primary-light);margin-bottom:10px">Ai 算力引擎</h4>
-                    <p>搭载业界主流高端算力硬件，搭建弹性扩缩容算力集群，支持7B至70B+全系列大模型推理 with 微调，提供按量计费、秒级调度、高并发稳定输出的算力服务。</p>
+                    <p data-i18n="about.b1">搭载业界主流高端算力硬件，搭建弹性扩缩容算力集群，支持7B至70B+全系列大模型推理与微调，提供按量计费、秒级调度、高并发稳定输出的算力服务。</p>
                 </div>
                 <div class="about-box" style="margin:0">
-                    <h4 style="color:var(--primary-light);margin-bottom:10px">Ai Studio 创作平台</h4>
-                    <p>整合文本生成、图像创作、音频处理、视频生成四大核心能力，覆盖文案写作、视觉设计、音视频制作、数字人播报等全场景需求，为用户提供零门槛AI创作解决方案。</p>
+                    <h4 style="color:var(--primary-light);margin-bottom:10px">Ai Studio</h4>
+                    <p data-i18n="about.b2">整合文本生成、图像创作、音频处理、视频生成四大核心能力，覆盖文案写作、视觉设计、音视频制作等全场景需求，为用户提供零门槛AI创作解决方案。</p>
                 </div>
                 <div class="about-box" style="margin:0">
-                    <h4 style="color:var(--primary-light);margin-bottom:10px">Ai 智能体服务</h4>
-                    <p>自主研发AI智能硬件，用AI+智能硬件打造通用、编程、设计、营销等专业化智能体矩阵，实现办公提效、代码开发、创意设计、营销策划等工作的自动化落地。</p>
+                    <h4 style="color:var(--primary-light);margin-bottom:10px" data-i18n="about.b3Title">Ai 智能体服务</h4>
+                    <p data-i18n="about.b3">自主研发AI智能硬件，用AI+智能硬件打造通用、编程、设计、营销等专业化智能体矩阵，实现办公提效、代码开发、创意设计等工作的自动化落地。</p>
                 </div>
             </div>
         </div>
 
-        <!-- 核心团队实力 -->
         <div class="about-box">
-            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)">核心团队实力</h3>
-            <p>羽宇科技核心团队由人工智能算法、云计算架构、软硬件工程、产品设计等领域的资深从业者组成，兼具前沿技术研发能力 with 商业化落地经验. 团队深耕AI行业多年，持续跟进全球人工智能前沿技术迭代，专注于技术优化 with 体验升级，坚持以用户真实需求为核心，打磨每一项产品功能 with 服务细节。</p>
-            <p style="margin-top:12px">从底层算力架构优化、算法模型微调，到产品交互设计、场景化功能迭代，团队实现全链路自主研发 with 迭代，具备独立完成AI产品研发、部署、运维、升级的完整能力。</p>
+            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)" data-i18n="about.s3Title">核心团队实力</h3>
+            <p data-i18n="about.s3p1">羽宇科技核心团队由人工智能算法、云计算架构、软硬件工程、产品设计等领域的资深从业者组成，兼具前沿技术研发能力与商业化落地经验。团队深耕AI行业多年，持续跟进全球人工智能前沿技术迭代，专注于技术优化与体验升级，坚持以用户真实需求为核心。</p>
+            <p style="margin-top:12px" data-i18n="about.s3p2">从底层算力架构优化、算法模型微调，到产品交互设计、场景化功能迭代，团队实现全链路自主研发与迭代，具备独立完成AI产品研发、部署、运维、升级的完整能力。</p>
         </div>
 
-        <!-- 企业愿景 with 价值观 -->
         <div class="about-box">
-            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)">企业愿景 with 价值观</h3>
-            <h4 style="font-size:16px;margin-bottom:10px">企业愿景</h4>
-            <p style="margin-bottom:20px">成为轻量化、普惠化的顶尖AI生产力平台，让人工智能技术走出实验室、走进各行各业，赋能每一位创作者、每一个开发者、每一家企业，以科技创新驱动效率升级，助力数字产业高质量发展。</p>
-            <h4 style="font-size:16px;margin-bottom:15px">核心价值观</h4>
+            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)" data-i18n="about.s4Title">企业愿景与价值观</h3>
+            <h4 style="font-size:16px;margin-bottom:10px" data-i18n="about.visionLabel">企业愿景</h4>
+            <p style="margin-bottom:20px" data-i18n="about.visionText">成为轻量化、普惠化的顶尖AI生产力平台，让人工智能技术走出实验室、走进各行各业，赋能每一位创作者、每一个开发者、每一家企业，以科技创新驱动效率升级，助力数字产业高质量发展。</p>
+            <h4 style="font-size:16px;margin-bottom:15px" data-i18n="about.valuesLabel">核心价值观</h4>
             <div class="values-grid">
-                <div class="value-item"><i class="fas fa-lightbulb"></i> <span><strong>技术创新</strong> — 持续深耕AI核心技术，保持领先性</span></div>
-                <div class="value-item"><i class="fas fa-user-heart"></i> <span><strong>用户至上</strong> — 简化门槛，提供高性价比AI服务</span></div>
-                <div class="value-item"><i class="fas fa-seedling"></i> <span><strong>务实笃行</strong> — 专注落地 with 价值输出，拒绝概念化</span></div>
-                <div class="value-item"><i class="fas fa-hand-holding-heart"></i> <span><strong>开放普惠</strong> — 打破壁垒，推动AI技术大众化</span></div>
+                <div class="value-item"><i class="fas fa-lightbulb"></i> <span data-i18n="about.val1"><strong>技术创新</strong> — 持续深耕AI核心技术，保持领先性</span></div>
+                <div class="value-item"><i class="fas fa-user-heart"></i> <span data-i18n="about.val2"><strong>用户至上</strong> — 简化门槛，提供高性价比AI服务</span></div>
+                <div class="value-item"><i class="fas fa-seedling"></i> <span data-i18n="about.val3"><strong>务实笃行</strong> — 专注落地与价值输出，拒绝概念化</span></div>
+                <div class="value-item"><i class="fas fa-hand-holding-heart"></i> <span data-i18n="about.val4"><strong>开放普惠</strong> — 打破壁垒，推动AI技术大众化</span></div>
             </div>
         </div>
 
-        <!-- 未来展望 -->
         <div class="about-box" style="background:rgba(0,212,255,0.04);border-color:rgba(0,212,255,0.15)">
-            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)">未来展望</h3>
-            <p>未来，羽宇科技将持续聚焦人工智能核心赛道，持续优化算力基建、丰富AI创作工具矩阵、迭代智能硬件+智能体自动化能力。同时，深耕行业场景化解决方案，持续拓展商用落地边界，不断打磨产品体验、提升服务质量，以稳健的技术实力、创新的产品能力，为个人 with 企业用户提供更高效、更智能、更普惠的AI服务，持续助力数字经济创新发展。</p>
+            <h3 style="font-size:20px;margin-bottom:16px;color:var(--secondary)" data-i18n="about.s5Title">未来展望</h3>
+            <p data-i18n="about.s5p1">未来，羽宇科技将持续聚焦人工智能核心赛道，持续优化算力基建、丰富AI创作工具矩阵、迭代智能硬件+智能体自动化能力。同时，深耕行业场景化解决方案，持续拓展商用落地边界，不断打磨产品体验、提升服务质量，为个人与企业用户提供更高效、更智能、更普惠的AI服务，持续助力数字经济创新发展。</p>
         </div>
     </section>
 
@@ -386,7 +380,7 @@
     const i18n = {
         zh: {
             "nav.home": "首页", "nav.tokens": "Ai算力引擎", "nav.studio": "Ai Studio", "nav.agents": "Ai智能体", "nav.about": "关于我们",
-            "hero.title": "释放 AI 的无限可能", "hero.desc": "从算力引擎到智能创作，一站式 AI 解决方案，赋能开发者 with 创作者。", "hero.btnStart": "立即体验", "hero.btnMore": "了解更多",
+            "hero.title": "释放 AI 的无限可能", "hero.desc": "从算力引擎到智能创作，一站式 AI 解决方案，赋能开发者与创作者。", "hero.btnStart": "立即体验", "hero.btnMore": "了解更多",
             "stats.projects": "活跃项目", "stats.uptime": "服务可用性", "stats.tokens": "每日 Token 处理", "stats.rating": "用户评分",
             "tokens.title": "Ai 算力引擎", "tokens.starter": "个人开发者 & 小规模测试", "tokens.pro": "专业团队 & 生产级应用", "tokens.ent": "企业级大规模部署",
             "tokens.feat1": "标准延迟流式推理", "tokens.feat2": "7B参数量级支持", "tokens.feat4": "低延迟高性能推理", "tokens.feat5": "7B~70B全梯度基座支持", "tokens.feat7": "超低延迟超高速推理", "tokens.feat9": "私有化部署 + 99.99% SLA",
@@ -394,8 +388,17 @@
             "tokens.gptDesc": "官方资源获取，核心成本优势", "tokens.seedDesc": "最新的视觉模型适配技术", "tokens.glmDesc": "智谱 AI 核心合作伙伴",
             "studio.title": "Ai Studio 智能创作平台", "studio.text": "文本生成", "studio.textD": "文案、对话、代码、翻译、摘要", "studio.img": "图像创作", "studio.imgD": "文生图、修复、风格化、扩图", "studio.audio": "音频处理", "studio.audioD": "多语种TTS、音色转换、降噪", "studio.video": "AI视频生成", "studio.videoD": "数字人播报、自动剪辑、特效",
             "agents.title": "Ai Agents 专业化智能体矩阵", "agents.gen": "通用办公助手", "agents.genD": "总结、规划、问答、检索", "agents.coder": "编程开发助手", "agents.coderD": "生成、修复、优化、测试", "agents.des": "创意设计助手", "agents.desD": "构图、配色、文案、素材", "agents.mark": "营销策划助手", "agents.markD": "文案、方案、策略、分析",
-            "about.title": "关于我们", "about.h1": "Profile", "about.p1": "YuYu Tech builds one-stop AI productivity platforms via proprietary R&D.", "about.c1": "GPU clusters for fine-tuning.", "about.c2": "Zero-entry creative tools.", "about.c3": "Workflow automation.", "about.v1": "Innovation", "about.v2": "User First", "about.v3": "Practical", "about.v4": "Inclusive",
-            "auth.register": "注册账号", "auth.email": "邮箱", "common.back": "返回", "common.view": "查看详情"
+            "about.pageTitle": "羽宇科技 · 关于我们",
+            "about.s1Title": "企业简介", "about.s1p1": "羽宇科技，是一家聚焦人工智能核心技术研发与场景化落地的创新科技企业，深耕AI算力基建、AI智能创作、AI智能体三大核心赛道，致力于打造轻量化、高效率、全场景的一站式AI生产力平台。公司始终秉持'用AI创造价值，让技术服务于人'的核心理念，打破人工智能技术的使用壁垒，让前沿AI能力普惠个人创作者、开发者与各类企业用户。", "about.s1p2": "依托自主研发的弹性算力调度系统与多模态AI技术体系，羽宇科技构建了从底层GPU算力支撑、中端AI工具创作到上层智能体自动化服务的全链路产品矩阵。我们专注于轻量化部署、高性价比、极简操作体验，全方位适配个人学习创作、团队项目开发、企业规模化商用等多元场景。",
+            "about.s2Title": "核心业务体系", "about.s2Intro": "自成立以来，羽宇科技持续深耕人工智能落地应用，搭建三大核心业务板块，形成完整的AI服务生态：",
+            "about.b1": "搭载业界主流高端算力硬件，支持7B至70B+全系列大模型推理与微调，提供按量计费、秒级调度、高并发稳定输出的算力服务。",
+            "about.b2": "整合文本生成、图像创作、音频处理、视频生成四大核心能力，覆盖文案写作、视觉设计、音视频制作等全场景需求。",
+            "about.b3Title": "Ai 智能体服务", "about.b3": "自主研发AI智能硬件，打造通用、编程、设计、营销等专业化智能体矩阵，实现办公提效、代码开发、创意设计等工作的自动化落地。",
+            "about.s3Title": "核心团队实力", "about.s3p1": "羽宇科技核心团队由人工智能算法、云计算架构、软硬件工程、产品设计等领域的资深从业者组成，兼具前沿技术研发能力与商业化落地经验。", "about.s3p2": "从底层算力架构优化、算法模型微调，到产品交互设计、场景化功能迭代，团队实现全链路自主研发与迭代，具备独立完成AI产品研发、部署、运维、升级的完整能力。",
+            "about.s4Title": "企业愿景与价值观", "about.visionLabel": "企业愿景", "about.visionText": "成为轻量化、普惠化的顶尖AI生产力平台，让人工智能技术走出实验室、走进各行各业，赋能每一位创作者、每一个开发者、每一家企业，以科技创新驱动效率升级。", "about.valuesLabel": "核心价值观",
+            "about.val1": "技术创新 — 持续深耕AI核心技术，保持领先性", "about.val2": "用户至上 — 简化门槛，提供高性价比AI服务", "about.val3": "务实笃行 — 专注落地与价值输出，拒绝概念化", "about.val4": "开放普惠 — 打破壁垒，推动AI技术大众化",
+            "about.s5Title": "未来展望", "about.s5p1": "未来，羽宇科技将持续聚焦人工智能核心赛道，持续优化算力基建、丰富AI创作工具矩阵、迭代智能硬件+智能体自动化能力。同时，深耕行业场景化解决方案，为个人与企业用户提供更高效、更智能、更普惠的AI服务。",
+            "auth.register": "注册账号", "auth.email": "邮箱", "common.back": "返回", "common.view": "查看详情", "subpage.loading": "详细内容同步中..."
         },
         en: {
             "nav.home": "Home", "nav.tokens": "Tokens", "nav.studio": "Ai Studio", "nav.agents": "Ai Agents", "nav.about": "About Us",
@@ -407,8 +410,17 @@
             "tokens.gptDesc": "Official access, cost-effective", "tokens.seedDesc": "Latest vision model tech", "tokens.glmDesc": "Zhipu AI Strategic Partner",
             "studio.title": "Ai Studio Platform", "studio.text": "Text Gen", "studio.textD": "Copy, Code, Translation", "studio.img": "Image Gen", "studio.imgD": "T2I, Style, Upscale", "studio.audio": "Audio Pro", "studio.audioD": "TTS, Clone, Denoiser", "studio.video": "Video Gen", "studio.videoD": "Digital Human, Auto-Edit",
             "agents.title": "Ai Agents Matrix", "agents.gen": "Office Agent", "agents.genD": "Summary, Plan, QA", "agents.coder": "Coding Agent", "agents.coderD": "Gen, Debug, Optimize", "agents.des": "Design Agent", "agents.desD": "Layout, Color, Copy", "agents.mark": "Marketing Agent", "agents.markD": "Campaign, Strategy",
-            "about.title": "About Us", "about.h1": "Profile", "about.p1": "YuYu Tech builds one-stop AI productivity platforms via proprietary R&D.", "about.c1": "GPU clusters for fine-tuning.", "about.c2": "Zero-entry creative tools.", "about.c3": "Workflow automation.", "about.v1": "Innovation", "about.v2": "User First", "about.v3": "Practical", "about.v4": "Inclusive",
-            "auth.register": "Register", "auth.email": "Email", "common.back": "Back", "common.view": "Details"
+            "about.pageTitle": "YuYu Technology · About Us",
+            "about.s1Title": "Company Profile", "about.s1p1": "YuYu Technology is an innovative enterprise focused on AI R&D and real-world deployment, dedicated to AI compute infrastructure, intelligent creation, and AI agents. We uphold the principle of 'creating value with AI, letting technology serve people' to break barriers and make cutting-edge AI accessible to creators, developers, and enterprises.", "about.s1p2": "Leveraging our proprietary elastic scheduling system and multimodal AI framework, we deliver a full-stack product matrix spanning GPU compute, AI creative tools, and intelligent agent automation — optimized for lightweight deployment, cost-efficiency, and ease of use across individual, team, and enterprise scenarios.",
+            "about.s2Title": "Core Business", "about.s2Intro": "Since inception, YuYu Tech has built three core business pillars forming a complete AI service ecosystem:",
+            "about.b1": "High-end GPU clusters with elastic scaling, supporting 7B–70B+ LLM inference and fine-tuning. Pay-as-you-go, second-level scheduling, high-concurrency stable output.",
+            "about.b2": "Integrating text, image, audio, and video capabilities — covering copywriting, visual design, AV production, and digital human broadcasting. Zero-entry AI creation for all.",
+            "about.b3Title": "Ai Agent Services", "about.b3": "Proprietary AI hardware powers a matrix of specialized agents for office productivity, coding, design, and marketing — enabling real automation across workflows.",
+            "about.s3Title": "Team Strength", "about.s3p1": "The core team comprises senior experts in AI algorithms, cloud architecture, hardware/software engineering, and product design — combining frontier research capability with commercialization experience.", "about.s3p2": "From compute architecture to UX design, the team delivers full-stack independent R&D, capable of building, deploying, maintaining, and upgrading AI products end-to-end.",
+            "about.s4Title": "Vision & Values", "about.visionLabel": "Corporate Vision", "about.visionText": "To become the leading lightweight, inclusive AI productivity platform — bringing AI from the lab into every industry, empowering every creator, developer, and enterprise through innovation-driven efficiency.", "about.valuesLabel": "Core Values",
+            "about.val1": "Innovation — Continuously advance AI core technology and maintain leadership", "about.val2": "User First — Simplify access, deliver cost-effective high-quality AI services", "about.val3": "Practicality — Focus on real-world value, reject hollow concepts", "about.val4": "Inclusivity — Break barriers and democratize AI technology for all",
+            "about.s5Title": "Future Outlook", "about.s5p1": "YuYu Tech will continue deepening AI compute infrastructure, enriching the AI creative toolkit, and iterating on hardware + agent automation capabilities. We will expand industry-specific solutions and relentlessly refine our products to deliver smarter, more efficient, and more accessible AI services — fueling the digital economy.",
+            "auth.register": "Register", "auth.email": "Email", "auth.submit": "Sign Up Now", "common.back": "Back", "common.view": "Details", "subpage.loading": "Content synchronizing..."
         }
     };
 
@@ -423,11 +435,17 @@
         currentLang = lang;
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (i18n[lang][key]) el.innerText = i18n[lang][key];
+            if (i18n[lang][key] !== undefined) {
+                // 用 innerHTML 支持富文本翻译（如含 <strong> 的值）
+                el.innerHTML = i18n[lang][key];
+            }
         });
         document.getElementById('currentLangLabel').innerText = lang === 'zh' ? '中文' : 'English';
         document.getElementById('langDropdown').classList.remove('open');
     }
+
+    // 页面加载时立即应用默认语言，确保初始渲染正确
+    setLanguage('zh');
 
     hamburger.onclick = () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('open'); document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : ''; }
 
@@ -452,14 +470,15 @@
             const key = subEl.dataset.sub;
             subContainer.classList.add('active');
             sections.forEach(s => s.classList.remove('active'));
-            const title = i18n[currentLang][`sd.${key}T`] || subEl.querySelector('h3').innerText;
-            document.getElementById('subContent').innerHTML = `<div class='about-box'><h3>${title}</h3><p>详细内容同步中...</p></div>`;
+            const title = subEl.querySelector('h3') ? subEl.querySelector('h3').innerText : '';
+            const loading = i18n[currentLang]['subpage.loading'] || 'Loading...';
+            document.getElementById('subContent').innerHTML = "<div class='about-box'><h3>" + title + "</h3><p>" + loading + "</p></div>";
             window.scrollTo(0, 0);
         }
     });
 
     document.getElementById('subBackBtn').onclick = () => { subContainer.classList.remove('active'); document.querySelector('.nav-links a.active').click(); }
-    document.getElementById('logoHome').onclick = () => document.querySelector('[data-section=\"home\"]').click();
+    document.getElementById('logoHome').onclick = () => document.querySelector('[data-section="home"]').click();
     document.getElementById('langBtn').onclick = (e) => { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('open'); }
     document.querySelectorAll('#langDropdown button').forEach(b => b.onclick = () => setLanguage(b.dataset.lang));
     document.getElementById('closeReg').onclick = () => registerModal.classList.remove('open');
