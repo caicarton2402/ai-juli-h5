@@ -179,14 +179,32 @@
         /* Responsive UI */
         @media (max-width: 1024px) {
             .navbar { padding: 0 4%; }
-            .nav-links { display: none; }
-            .nav-links.open {
-                display: flex; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
-                flex-direction: column; background: #0A0A1A; padding: 40px; gap: 20px;
-                animation: slideIn 0.4s forwards;
+            .nav-links { 
+                display: none; 
+                position: fixed; 
+                top: 0; left: 0; right: 0; bottom: 0;
+                width: 100vw; height: 100vh;
+                background: rgba(10, 10, 26, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                z-index: 1050;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                padding: 40px;
             }
-            @keyframes slideIn { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
-            .hamburger { display: block; }
+            .nav-links.open {
+                display: flex;
+                animation: menuFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+            @keyframes menuFadeIn {
+                from { opacity: 0; transform: translateY(-20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .nav-links a { font-size: 32px; width: auto; }
+            .hamburger { display: block; position: relative; z-index: 1100; }
+            .nav-logo { position: relative; z-index: 1100; }
             .about-split { grid-template-columns: 1fr; }
             .values-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -426,7 +444,11 @@
         document.getElementById('langDropdown').classList.remove('open');
     }
 
-    hamburger.onclick = () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('open'); }
+    hamburger.onclick = () => { 
+        hamburger.classList.toggle('active'); 
+        navLinks.classList.toggle('open');
+        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+    }
 
     document.querySelectorAll('[data-section]').forEach(link => {
         link.onclick = () => {
@@ -438,6 +460,7 @@
             link.classList.add('active');
             navLinks.classList.remove('open');
             hamburger.classList.remove('active');
+            document.body.style.overflow = '';
             window.scrollTo(0, 0);
         }
     });
